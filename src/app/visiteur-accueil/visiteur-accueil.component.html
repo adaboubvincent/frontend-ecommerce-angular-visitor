@@ -1,0 +1,644 @@
+
+<div class="tab-slider-product section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="section-header text-center">
+                    <div class="container">
+                    </div>
+                    
+                </div>
+                <div class="tabs-listing">
+                    <div style="margin:20px;"></div>
+                    
+                    <div class="tab_container">
+                        <div id="tab1" class="grid-products">
+                           
+                            
+                            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+                            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+                            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+                            <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+                            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+                            <style>
+                            body {
+                                font-family: "Open Sans", sans-serif;
+                            }
+                            h2 {
+                                color: #000;
+                                font-size: 26px;
+                                font-weight: 300;
+                                text-align: center;
+                                text-transform: uppercase;
+                                position: relative;
+                                margin: 30px 0 80px;
+                            }
+                            h2 b {
+                                color: #ffc000;
+                            }
+                            h2::after {
+                                content: "";
+                                width: 100px;
+                                position: absolute;
+                                margin: 0 auto;
+                                height: 4px;
+                                background: rgba(0, 0, 0, 0.2);
+                                left: 0;
+                                right: 0;
+                                bottom: -20px;
+                            }
+                            .carousel {
+                                margin: 50px auto;
+                                padding: 0 70px;
+                            }
+                            .carousel .carousel-item {
+                                min-height: 330px;
+                                text-align: center;
+                                overflow: hidden;
+                            }
+                            .carousel .carousel-item .img-box {
+                                height: 160px;
+                                width: 100%;
+                                position: relative;
+                            }
+                            .carousel .carousel-item img {	
+                                max-width: 100%;
+                                max-height: 100%;
+                                display: inline-block;
+                                position: absolute;
+                                bottom: 0;
+                                margin: 0 auto;
+                                left: 0;
+                                right: 0;
+                            }
+                            .carousel .carousel-item h4 {
+                                font-size: 18px;
+                                margin: 10px 0;
+                            }
+                            .carousel .carousel-item .btn {
+                                color: #333;
+                                border-radius: 0;
+                                font-size: 11px;
+                                text-transform: uppercase;
+                                font-weight: bold;
+                                background: none;
+                                border: 1px solid #ccc;
+                                padding: 5px 10px;
+                                margin-top: 5px;
+                                line-height: 16px;
+                            }
+                            .carousel .carousel-item .btn:hover, .carousel .carousel-item .btn:focus {
+                                color: #fff;
+                                background: #000;
+                                border-color: #000;
+                                box-shadow: none;
+                            }
+                            .carousel .carousel-item .btn i {
+                                font-size: 14px;
+                                font-weight: bold;
+                                margin-left: 5px;
+                            }
+                            .carousel .thumb-wrapper {
+                                text-align: center;
+                            }
+                            .carousel .thumb-content {
+                                padding: 15px;
+                            }
+                            .carousel-control-prev, .carousel-control-next {
+                                height: 100px;
+                                width: 40px;
+                                background: none;
+                                margin: auto 0;
+                                background: rgba(0, 0, 0, 0.2);
+                            }
+                            .carousel-control-prev i, .carousel-control-next i {
+                                font-size: 30px;
+                                position: absolute;
+                                top: 50%;
+                                display: inline-block;
+                                margin: -16px 0 0 0;
+                                z-index: 5;
+                                left: 0;
+                                right: 0;
+                                color: rgba(0, 0, 0, 0.8);
+                                text-shadow: none;
+                                font-weight: bold;
+                            }
+                            .carousel-control-prev i {
+                                margin-left: -3px;
+                            }
+                            .carousel-control-next i {
+                                margin-right: -3px;
+                            }
+                            .carousel .item-price {
+                                font-size: 13px;
+                                padding: 2px 0;
+                            }
+                            .carousel .item-price strike {
+                                color: #999;
+                                margin-right: 5px;
+                            }
+                            .carousel .item-price span {
+                                color: #86bd57;
+                                font-size: 110%;
+                            }	
+                            .carousel .carousel-indicators {
+                                bottom: -50px;
+                            }
+                            .carousel-indicators li, .carousel-indicators li.active {
+                                width: 10px;
+                                height: 10px;
+                                margin: 4px;
+                                border-radius: 50%;
+                                border-color: transparent;
+                                border: none;
+                            }
+                            .carousel-indicators li {	
+                                background: rgba(0, 0, 0, 0.2);
+                            }
+                            .carousel-indicators li.active {	
+                                background: rgba(0, 0, 0, 0.6);
+                            }
+                            .star-rating li {
+                                padding: 0;
+                            }
+                            .star-rating i {
+                                font-size: 14px;
+                                color: #ffc000;
+                            }
+                            </style>
+                            
+                            <div class="container">
+                                <h1 *ngIf="estCommande">Votre commande a été éffectuée avec succès.\nVous serez livrés dans 5 jours.</h1>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h2>Les derniers <b>Articles</b></h2>
+                                        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li *ngIf="produits1.length !== 0" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                            <li *ngIf="produits2.length !== 0" data-target="#myCarousel" data-slide-to="1"></li>
+                                            <li *ngIf="produits3.length !== 0" data-target="#myCarousel" data-slide-to="2"></li>
+                                            <li *ngIf="produits4.length !== 0" data-target="#myCarousel" data-slide-to="3"></li>
+                                            <li *ngIf="produits5.length !== 0" data-target="#myCarousel" data-slide-to="4"></li>
+                                            <li *ngIf="produits6.length !== 0" data-target="#myCarousel" data-slide-to="5"></li>
+                                        </ol>
+                                        <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active" *ngIf="produits1.length !== 0">
+                                                <div class="row">		
+                                                    <div class="col-sm-4" *ngFor="let pr of produits1">
+                                                        <div class="thumb-wrapper">
+                                                            <div class="img-box">
+                                                                <img src="{{url}}{{pr.image?.image}}" class="img-fluid btn" alt="" (click)="showPageDetailProduit(pr?.id)">
+                                                            </div>
+                                                            <div class="thumb-content">
+                                                                <h4 class="trim-info">{{pr.nom}}</h4>
+                                                                <p class="item-category trim-info"><span>{{pr.categorie?.nom}}</span></p>
+                                                                
+                                                                <p *ngIf="pr.diminu_price" class="item-price"><span class="old-price">{{pr.prix}} CFA</span> <span>{{pr.diminu_price}} CFA</span></p>
+                                                                <p *ngIf="!pr.diminu_price" class="item-price"><span>{{pr.prix}} CFA</span></p>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <button (click)="addProductToCart(pr.id)" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item" *ngIf="produits2.length !== 0">
+                                                <div class="row">
+                                                    <div class="col-sm-4" *ngFor="let pr of produits2">
+                                                        <div class="thumb-wrapper">
+                                                            <div class="img-box">
+                                                                <img src="{{url}}{{pr.image?.image}}" class="img-fluid btn" alt="" (click)="showPageDetailProduit(pr?.id)">
+                                                            </div>
+                                                            <div class="thumb-content">
+                                                                <h4 class="trim-info">{{pr.nom}}</h4>
+                                                                <p class="item-category trim-info"><span>{{pr.categorie?.nom}}</span></p>
+
+                                                                <p *ngIf="pr.diminu_price" class="item-price"><span class="old-price">{{pr.prix}} CFA</span> <span>{{pr.diminu_price}} CFA</span></p>
+                                                                <p *ngIf="!pr.diminu_price" class="item-price"><span>{{pr.prix}} CFA</span></p>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <button (click)="addProductToCart(pr.id)" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>						
+                                                        </div>
+                                                    </div>						
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item" *ngIf="produits3.length !== 0">
+                                                <div class="row">
+                                                    <div class="col-sm-4" *ngFor="let pr of produits3">
+                                                        <div class="thumb-wrapper">
+                                                            <div class="img-box">
+                                                                <img src="{{url}}{{pr.image?.image}}" class="img-fluid btn" alt="" (click)="showPageDetailProduit(pr?.id)">
+                                                            </div>
+                                                            <div class="thumb-content">
+                                                                <h4 class="trim-info">{{pr.nom}}</h4>
+                                                                <p class="item-category trim-info"><span>{{pr.categorie?.nom}}</span></p>
+
+                                                                <p *ngIf="pr.diminu_price" class="item-price"><span class="old-price">{{pr.prix}} CFA</span> <span>{{pr.diminu_price}} CFA</span></p>
+                                                                <p *ngIf="!pr.diminu_price" class="item-price"><span>{{pr.prix}} CFA</span></p>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <button (click)="addProductToCart(pr.id)" class="btn btn-primary">Add to Cart</button>
+                                                            </div>						
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item" *ngIf="produits4.length !== 0">
+                                                <div class="row">
+                                                    <div class="col-sm-4" *ngFor="let pr of produits4">
+                                                        <div class="thumb-wrapper">
+                                                            <div class="img-box">
+                                                                <img src="{{url}}{{pr.image?.image}}" class="img-fluid btn" alt="" (click)="showPageDetailProduit(pr?.id)">
+                                                            </div>
+                                                            <div class="thumb-content">
+                                                                <h4 class="trim-info">{{pr.nom}}</h4>
+                                                                <p class="item-category trim-info"><span>{{pr.categorie?.nom}}</span></p>
+
+                                                                <p *ngIf="pr.diminu_price" class="item-price"><span class="old-price">{{pr.prix}} CFA</span> <span>{{pr.diminu_price}} CFA</span></p>
+                                                                <p *ngIf="!pr.diminu_price" class="item-price"><span>{{pr.prix}} CFA</span></p>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <button (click)="addProductToCart(pr.id)" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>						
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item" *ngIf="produits5.length !== 0">
+                                                <div class="row">
+                                                    <div class="col-sm-4" *ngFor="let pr of produits5">
+                                                        <div class="thumb-wrapper">
+                                                            <div class="img-box">
+                                                                <img src="{{url}}{{pr.image?.image}}" class="img-fluid btn" alt="" (click)="showPageDetailProduit(pr?.id)">
+                                                            </div>
+                                                            <div class="thumb-content">
+                                                                <h4 class="trim-info">{{pr.nom}}</h4>
+                                                                <p class="item-category trim-info"><span>{{pr.categorie?.nom}}</span></p>
+
+                                                                <p *ngIf="pr.diminu_price" class="item-price"><span class="old-price">{{pr.prix}} CFA</span> <span>{{pr.diminu_price}} CFA</span></p>
+                                                                <p *ngIf="!pr.diminu_price" class="item-price"><span>{{pr.prix}} CFA</span></p>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <button (click)="addProductToCart(pr.id)" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>						
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="carousel-item" *ngIf="produits6.length !== 0">
+                                                <div class="row">
+                                                    <div class="col-sm-4" *ngFor="let pr of produits6">
+                                                        <div class="thumb-wrapper">
+                                                            <div class="img-box">
+                                                                <img src="{{url}}{{pr.image?.image}}" class="img-fluid btn" alt="" (click)="showPageDetailProduit(pr?.id)">
+                                                            </div>
+                                                            <div class="thumb-content">
+                                                                <h4 class="trim-info">{{pr.nom}}</h4>
+                                                                <p class="item-category trim-info"><span>{{pr.categorie?.nom}}</span></p>
+                                                                
+                                                                <p *ngIf="pr.diminu_price" class="item-price"><span class="old-price">{{pr.prix}} CFA</span> <span>{{pr.diminu_price}} CFA</span></p>
+                                                                <p *ngIf="!pr.diminu_price" class="item-price"><span>{{pr.prix}} CFA</span></p>
+                                                                <div class="star-rating">
+                                                                    <ul class="list-inline">
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star"></i></li>
+                                                                        <li class="list-inline-item"><i class="fa fa-star-o"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <button (click)="addProductToCart(pr.id)" class="btn btn-primary">Ajouter au panier</button>
+                                                            </div>						
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel controls -->
+                                        <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                                            <i class="fa fa-angle-left"></i>
+                                        </a>
+                                        <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                        <div id="tab2" class="tab_content grid-products">
+                            <div class="productSlider">
+                      
+                            </div>
+                        </div>
+                        <div id="tab3" class="tab_content grid-products">
+                            <div class="productSlider">
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--Collection Tab slider-->
+        <div class="tab-slider-product section">
+        	<div class="container">
+            	<div class="row">
+                	<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                        <div class="section-header text-center">
+                            <h2 class="h2">New Arrivals</h2>
+                            <p>Browse the huge variety of our products</p>
+                        </div>
+                        <div class="tabs-listing">
+                            <ul class="tabs clearfix">
+                                <li class="active" rel="tab1">Women</li>
+                                <li rel="tab2">Men</li>
+                                <li rel="tab3">Sale</li>
+                            </ul>
+                           
+                            <div class="tab_container">
+                                <div id="tab1" class="tab_content grid-products">
+                                    <p>djkfj</p>
+                                    <div class="productSlider">
+                                        <div *ngFor="let pro of produits3" class="col-12 item">
+                                            <!-- start product image -->
+                                            <div class="product-image">
+                                                <!-- start product image -->
+                                                <a href="short-description.html">
+                                                    <!-- image -->
+                                                    <img class="primary blur-up lazyload" src="{{url}}{{pro.image?.image}}" alt="image" title="product">
+                                                    <!-- End image -->
+                                                    <!-- Hover image -->
+                                                    <img class="hover blur-up lazyload"  src="{{url}}{{pro.image?.image}}" alt="image" title="product">
+                                                    <!-- End hover image -->
+                                                    <!-- product label -->
+                                                    <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>
+                                                    <!-- End product label -->
+                                                </a>
+                                                <!-- end product image -->
+                                                
+                                                <!-- countdown start -->
+                                        		<div class="saleTime desktop" data-countdown="2022/03/01"></div>
+                                        		<!-- countdown end -->
+        
+                                                <!-- Start product button -->
+                                                <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
+                                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
+                                                </form>
+                                                <div class="button-set">
+                                                    <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
+                                                        <i class="icon anm anm-search-plus-r"></i>
+                                                    </a>
+                                                    <div class="wishlist-btn">
+                                                        <a class="wishlist add-to-wishlist" href="wishlist.html">
+                                                            <i class="icon anm anm-heart-l"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="compare-btn">
+                                                        <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
+                                                            <i class="icon anm anm-random-r"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- end product button -->
+                                            </div>
+                                            <!-- end product image -->
+                                            <!--start product details -->
+                                            <div class="product-details text-center">
+                                                <!-- product name -->
+                                                <div class="product-name">
+                                                    <a href="short-description.html">Edna Dress</a>
+                                                </div>
+                                                <!-- End product name -->
+                                                <!-- product price -->
+                                                <div class="product-price">
+                                                    <span class="old-price">$500.00</span>
+                                                    <span class="price">$600.00</span>
+                                                </div>
+                                                <!-- End product price -->
+                                                
+                                                <div class="product-review">
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                </div>
+                                                <!-- Variant -->
+                                                <!-- <ul class="swatches">
+                                                    <li class="swatch medium rounded"><img src="assets/images/product-images/variant1.jpg" alt="image" /></li>
+                                                    <li class="swatch medium rounded"><img src="assets/images/product-images/variant2.jpg" alt="image" /></li>
+                                                    <li class="swatch medium rounded"><img src="assets/images/product-images/variant3.jpg" alt="image" /></li>
+                                                    <li class="swatch medium rounded"><img src="assets/images/product-images/variant4.jpg" alt="image" /></li>
+                                                    <li class="swatch medium rounded"><img src="assets/images/product-images/variant5.jpg" alt="image" /></li>
+                                                    <li class="swatch medium rounded"><img src="assets/images/product-images/variant6.jpg" alt="image" /></li>
+                                                </ul> -->
+                                                <!-- End Variant -->
+                                            </div>
+                                            <!-- End product details -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab2" class="tab_content grid-products">
+                                    <div class="productSlider">
+                                        <div class="col-12 item">
+                                            <!-- start product image -->
+                                            <div class="product-image">
+                                                <!-- start product image -->
+                                                <a href="short-description.html">
+                                                    <!-- image -->
+                                                    <img class="primary blur-up lazyload" data-src="assets/images/product-images/product-image6.jpg" src="assets/images/product-images/product-image6.jpg" alt="image" title="product">
+                                                    <!-- End image -->
+                                                    <!-- Hover image -->
+                                                    <img class="hover blur-up lazyload" data-src="assets/images/product-images/product-image6-1.jpg" src="assets/images/product-images/product-image6-1.jpg" alt="image" title="product">
+                                                    <!-- End hover image -->
+                                                    <!-- product label -->
+                                                    <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>
+                                                    <!-- End product label -->
+                                                </a>
+                                                <!-- end product image -->
+        
+                                                <!-- Start product button -->
+                                                <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
+                                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
+                                                </form>
+                                                <div class="button-set">
+                                                    <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
+                                                        <i class="icon anm anm-search-plus-r"></i>
+                                                    </a>
+                                                    <div class="wishlist-btn">
+                                                        <a class="wishlist add-to-wishlist" href="wishlist.html">
+                                                            <i class="icon anm anm-heart-l"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="compare-btn">
+                                                        <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
+                                                            <i class="icon anm anm-random-r"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- end product button -->
+                                            </div>
+                                            <!-- end product image -->
+        
+                                            <!--start product details -->
+                                            <div class="product-details text-center">
+                                                <!-- product name -->
+                                                <div class="product-name">
+                                                    <a href="short-description.html">Zipper Jacket</a>
+                                                </div>
+                                                <!-- End product name -->
+                                                <!-- product price -->
+                                                <div class="product-price">
+                                                    <span class="price">$788.00</span>
+                                                </div>
+                                                <!-- End product price -->
+                                                
+                                                <div class="product-review">
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                            <!-- End product details -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="tab3" class="tab_content grid-products">
+                                    <div class="productSlider">
+                                        <div class="col-12 item">
+                                            <!-- start product image -->
+                                            <div class="product-image">
+                                                <!-- start product image -->
+                                                <a href="short-description.html">
+                                                    <!-- image -->
+                                                    <img class="primary blur-up lazyload" data-src="assets/images/product-images/product-image11.jpg" src="assets/images/product-images/product-image11.jpg" alt="image" title="product">
+                                                    <!-- End image -->
+                                                    <!-- Hover image -->
+                                                    <img class="hover blur-up lazyload" data-src="assets/images/product-images/product-image11-1.jpg" src="assets/images/product-images/product-image11-1.jpg" alt="image" title="product">
+                                                    <!-- End hover image -->
+                                                </a>
+                                                <!-- end product image -->
+        
+                                                <!-- Start product button -->
+                                                <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
+                                                    <button class="btn btn-addto-cart" type="button" tabindex="0">Add To Cart</button>
+                                                </form>
+                                                <div class="button-set">
+                                                    <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
+                                                        <i class="icon anm anm-search-plus-r"></i>
+                                                    </a>
+                                                    <div class="wishlist-btn">
+                                                        <a class="wishlist add-to-wishlist" href="wishlist.html">
+                                                            <i class="icon anm anm-heart-l"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="compare-btn">
+                                                        <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
+                                                            <i class="icon anm anm-random-r"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- end product button -->
+                                            </div>
+                                            <!-- end product image -->
+        
+                                            <!--start product details -->
+                                            <div class="product-details text-center">
+                                                <!-- product name -->
+                                                <div class="product-name">
+                                                    <a href="short-description.html">Azur Bracelet in Blue Azurite</a>
+                                                </div>
+                                                <!-- End product name -->
+                                                <!-- product price -->
+                                                <div class="product-price">
+                                                    <span class="price">$168.00</span>
+                                                </div>
+                                                <!-- End product price -->
+                                                
+                                                <div class="product-review">
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star"></i>
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                    <i class="font-13 fa fa-star-o"></i>
+                                                </div>
+                                            </div>
+                                            <!-- End product details -->
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            	</div>    
+            </div>
+        </div>
+        <!--Collection Tab slider-->
+

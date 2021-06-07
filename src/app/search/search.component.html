@@ -1,0 +1,40 @@
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<p style="text-align: center !important; margin-bottom: 25px !important; text-decoration: underline !important;">Résultat de : {{question}}</p>
+
+<div *ngIf="produitsListSearch.length === 0">
+  <h3 align="center">Aucun Produit n'a pas été trouvé</h3>
+</div>
+<div style="width: 50% !important; margin: auto !important;" *ngFor="let pro of produitsListSearch">
+    <figure class="md:flex bg-gray-100 rounded-xl p-8 md:p-0">
+        <img class="w-32 h-32 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src="{{BASE_URL}}{{pro.image?.image}}" alt="" width="500" height="512">
+        <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+            <figcaption class="font-medium">
+                <div class="text-cyan-600">
+                  {{pro.nom}}
+                </div>
+                <div *ngIf="pro.diminu_price" class="text-gray-500">
+                    <span class="old-price">{{pro.prix}} CFA</span> <span>{{pro.diminu_price}} CFA</span>
+                </div>
+                <div  *ngIf="!pro.diminu_price" class="text-gray-500">
+                    <span>{{pro.prix}} CFA</span>
+                </div>
+
+                <div class="text-gray-500">
+                    <span>Catégorie : {{pro.categorie?.nom}}</span>
+                </div>
+
+                <div class="text-gray-500">
+                    <span>Quatité disponible : {{pro.quantite}}</span>
+                </div>
+
+              </figcaption>
+          <blockquote>
+            <p class="text-lg font-semibold">
+              {{pro.caracteristique}}
+            </p>
+          </blockquote>
+            <button (click)="addProductToCart(pro.id)" class="btn btn-primary">Ajouter au panier</button>
+        </div>
+      </figure>
+      <div style="margin-bottom: 15px !important;"></div>
+</div>

@@ -1,0 +1,8 @@
+.nomBorderBottom {
+    color: blue;
+}
+
+.nomBorderBottom:hover {
+    border-bottom: 2px solid blue;
+    cursor:  pointer;
+}

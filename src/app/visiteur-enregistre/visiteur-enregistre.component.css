@@ -1,0 +1,6 @@
+#bg-register {
+    /* background-image: url(../../assets/images/Logo.png);  */
+    background-attachment: no-repeat; 
+    background-size: cover; 
+    background-position: center;
+}

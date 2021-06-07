@@ -1,0 +1,148 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+           
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                <li  data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+            </ol>
+            <!-- Wrapper for carousel items -->
+            <div class="carousel-inner">
+                <div class="carousel-item active" >
+                    <div class="row">
+                        <div class="col-sm-2" >
+                            
+                            <div class="thumb-content">
+                                <img (click)="choosePay('mtn')" src="../../assets/images/logo_pay/mtn-logo.jpg" class="img-fluid btn" alt="" />
+                            </div>	
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                    <img (click)="choosePay('paypal')" src="../../assets/images/logo_pay/paypal.png" class="img-fluid btn" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                    <img (click)="choosePay('visa')" src="../../assets/images/logo_pay/visa.png" class="img-fluid btn" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                <div class="img-box">
+                                    <img (click)="choosePay('mastercard')" src="../../assets/images/logo_pay/MasterCard_Logo.svg.png" class="img-fluid btn" alt="" />
+                                </div>
+                                                        
+                            </div>
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                    <img (click)="choosePay('flooz')" src="../../assets/images/logo_pay/flooz.jpg" class="img-fluid btn" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                    <img (click)="choosePay('tmoney')" src="../../assets/images/logo_pay/tmoney.png" class="img-fluid btn" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="carousel-item" >
+                    <div class="row">
+                        
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                    <img (click)="choosePay('americanexpress')" src="../../assets/images/logo_pay/american-express.png" class="img-fluid btn" alt="" />
+                            </div>
+                        </div>
+                        <div class="col-sm-2" >
+                            <div class="thumb-content">
+                                <div class="img-box">
+                                    <img (click)="choosePay('mastercard')" src="../../assets/images/logo_pay/MasterCard_Logo.svg.png" class="img-fluid btn" alt="" >
+                                </div>
+                                                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div style="text-align: center; justify-content: center;">
+                <form (submit)="onSubmit()">
+                    <br />
+                    <div *ngIf="chooseAverage == 'mtn'">
+                        <h1>MTN</h1>
+                        <br />
+                        <label for="phone">Entrez votre numéro de téléphone :</label>
+
+                        <input type="tel" id="phone" name="phone"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}"
+                            placeholder="978-385-26"
+                            required />
+
+                    </div>
+
+                    <div *ngIf="chooseAverage == 'paypal'">
+                        <h1>PAYPAL</h1>
+                    </div>
+
+                    <div *ngIf="chooseAverage == 'visa'">
+                        <h1>VISA</h1>
+                        <br />
+                        <label for="numero_compte">Entrez votre numéro de compte :</label>
+                        <input type="text" id="numero_compte" name="numero_compte"
+                            placeholder="XXXX-XXXX-XXXX-XXXX"
+                            required />
+                            <br />
+                        <label for="date_expiration">Entrez la date d'expiration :</label>
+                        <input type="date" name="date_expiration" id="date_expiration">
+                        
+                    </div>
+
+                    <div *ngIf="chooseAverage == 'mastercard'">
+                        <h1>MASTER CARD</h1>
+                    </div>
+
+                    <div *ngIf="chooseAverage == 'flooz'">
+                        <h1>FLOOZ</h1>
+                        <br />
+                        <label for="phone">Entrez votre numéro de téléphone :</label>
+                        <input type="tel" id="phone" name="phone"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}"
+                            placeholder="978-385-26"
+                            required />
+                    </div>
+
+                    <div *ngIf="chooseAverage == 'tmoney'">
+                        <h1>TMONEY</h1>
+                        <br />
+                        <label for="phone">Entrez votre numéro de téléphone :</label>
+                        <input type="tel" id="phone" name="phone"
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}"
+                            placeholder="978-385-26"
+                            required />
+                    </div>
+
+                    <div *ngIf="chooseAverage == 'americanexpress'">
+                        <h1>AMERICAN EXPRESS</h1>
+                    </div>
+                    <br />
+                    <input type="submit" value="Commander et Payer" class="btn btn-dark">
+                </form>
+            </div>
+            
+            <!-- Carousel controls -->
+            <a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
