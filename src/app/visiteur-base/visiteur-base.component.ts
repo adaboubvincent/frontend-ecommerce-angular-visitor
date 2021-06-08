@@ -129,8 +129,8 @@ export class VisiteurBaseComponent implements OnInit {
 
   logout(){
 	  this.securityService.logout(localStorage.getItem('token')).subscribe((res) => {
-		let dict = res;
 		this.produitService.notificationAjouter("Vous êtes déconnecté maintenant!", "success");
+		window.location.reload();
 	});
 
 	localStorage.setItem('token', "");

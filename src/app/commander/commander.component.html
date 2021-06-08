@@ -72,6 +72,9 @@
             </div>
 
             <div style="text-align: center; justify-content: center;">
+                <h5 *ngIf="remplireInfos" style="color: red;">
+                    Vos informations personnelles ne sont pas encore remplir(Infos client). <a target="__blank" href="profile" style="color: blue;">Remplir les en même temps.</a>
+                </h5>
                 <form (submit)="onSubmit()">
                     <br />
                     <div *ngIf="chooseAverage == 'mtn'">

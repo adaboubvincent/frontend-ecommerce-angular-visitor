@@ -39,12 +39,12 @@ export class DaoService<T> {
         };
         return this.http.delete(this.url + url, options);
     }
-    modifyT(url: string, t: T | undefined){
-        return this.http.put(this.url + url, t);
+    modifyT(url: string, t: T | undefined): Observable<T>{
+        return this.http.put<T>(this.url + url, t);
     }
 
     get(url: string, id: number): Observable<T>{
-        return this.http.get<T>(this.url + url + id);
+        return this.http.get<T>(this.url + url + id + "/");
     }
 
     notificationAjouter(message: string, type: string ="success"){

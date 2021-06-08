@@ -22,6 +22,7 @@ import { ContactComponent } from './contact/contact.component';
 import { SecurityService } from './services/user/security.service';
 import { AuthGuard } from './services/guard-auth/auth.guard';
 import { TokenInterceptorService } from './services/guard-auth/token-interceptor.service';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { TokenInterceptorService } from './services/guard-auth/token-interceptor
     SearchComponent,
     DetailPanierComponent,
     CommanderComponent,
-    ContactComponent
+    ContactComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
