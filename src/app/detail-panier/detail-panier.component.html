@@ -1,0 +1,205 @@
+<!--div class="modal-body">
+                              
+
+    <ul class="mini-products-list" *ngIf="productsACommander?.length !== 0">
+    
+      <li class="produit" *ngFor="let pr of productsACommander">
+        <a class="product-image" href="#">
+            <img src="{{url}}{{pr.image?.image}}" alt="{{pr.produit?.nom}}" title="{{pr.produit?.nom}}" />
+            
+          </a>
+          <div class="product-details">
+            <a (click)="supprimerProduitACommanderDansPanier(pr.id)" class="remove"><i-bs name="trashFill" class="text-danger" ></i-bs></a>
+             
+              <div class="variant-cart">{{pr.produit?.nom}}</div>
+              <div class="wrapQtyBtn margin-right">
+                  <div class="qtyField">
+                      <a class="qtyBtn minus" (click)="DiminuQuantiteProduit(pr.id)" ><i-bs
+                        name="chevron-compact-left"
+                        class="text-primary">
+                      </i-bs></a>
+                      <input type="text" name="quantity" value="{{pr.quantite}}" class="product-form__input qty">
+                      <a class="qtyBtn plus" (click)="AugmenteQuantiteProduit(pr.id)"><i-bs
+                        name="chevron-compact-right"
+                        class="text-primary">
+                      </i-bs></a>
+                  </div>
+              </div>
+              <div class="priceRow">
+                <div class="product-price">
+                    <span class="money" *ngIf="pr.produit?.diminu_price"> {{ multiple(pr.produit?.diminu_price, pr.quantite) }} Fcfa</span>
+                    <span class="money" *ngIf="!pr.produit?.diminu_price"> {{ multiple(pr.produit?.prix, pr.quantite) }} Fcfa</span>
+                  </div>
+               </div>
+        </div>
+      </li>
+     
+     
+    
+  </ul>
+
+
+
+  <div class="total" *ngIf="productsACommander?.length !== 0">
+    <div class="total-in">
+        <span class="label">Prix Total du Panier:</span><span class="product-price"><span *ngIf="prixTotalPanierFinal" class="money">{{prixTotalPanierFinal}} Fcfa</span><span *ngIf="!prixTotalPanierFinal" class="money">{{prixTotalPanier}} Fcfa</span></span>
+      </div>
+       
+  </div>
+  
+  <div class="total" *ngIf="productsACommander?.length === 0 || productsACommander === undefined">
+    <div class="total-in">
+        <span class="label">PANIER VIDE</span>
+      </div>
+  
+  </div>
+
+  </div-->
+      <!--Body Content-->
+      <div id="page-content">
+        <!--Page Title-->
+        <div class="page section-header text-center">
+        <div class="page-title">
+              <div class="wrapper"><h1 class="page-width">Votre panier</h1></div>
+            </div>
+      </div>
+          <!--End Page Title-->
+          
+          <div class="container">
+            <div class="row">
+                  <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col">
+                    <form action="#" method="post" class="cart style2" *ngIf="productsACommander?.length !== 0">
+                      <table>
+                              <thead class="cart__row cart__header">
+                                  <tr>
+                                      <th colspan="2" class="text-center">Produit</th>
+                                      <th class="text-center">Prix</th>
+                                      <th class="text-center">Quantité</th>
+                                      <th class="text-right">Total</th>
+                                      <th class="action">&nbsp;</th>
+                                  </tr>
+                              </thead>
+                          <tbody>
+                                  <tr class="cart__row border-bottom line1 cart-flex border-top" *ngFor="let pr of productsACommander" >
+                                      <td class="cart__image-wrapper cart-flex-item">
+                                          <a href="#"><img class="cart__image" src="{{url}}{{pr.image?.image}}" alt="{{pr.produit?.nom}}" title="{{pr.produit?.nom}}" ></a>
+                                      </td>
+                                      <td class="cart__meta small--text-left cart-flex-item">
+                                          <div class="list-view-item__title">
+                                              <span class="nomBorderBottom" (click)="showPageDetailProduit(pr?.produit?.id)" >{{pr.produit?.nom}} </span>
+                                          </div>
+                                          
+                                          <div class="cart__meta-text">
+                                              Color: Navy<br>Size: Small<br>
+                                          </div>
+                                      </td>
+                                      <td class="cart__price-wrapper cart-flex-item">
+                                        <span class="money" *ngIf="pr.produit?.diminu_price"> {{ pr.produit?.diminu_price }} Fcfa</span>
+                                        <span class="money" *ngIf="!pr.produit?.diminu_price"> {{ pr.produit?.prix }} Fcfa</span>
+                                      </td>
+                                      <td class="cart__update-wrapper cart-flex-item text-right">
+                                          <div class="cart__qty text-center">
+                                              <div class="qtyField">
+                                                <a class="qtyBtn minus" (click)="DiminuQuantiteProduit(pr.id)" ><i-bs
+                                                  name="chevron-compact-left"
+                                                  class="text-primary">
+                                                </i-bs></a>
+                                                <input type="text" name="quantity" value="{{pr.quantite}}" class="product-form__input qty">
+                                                <a class="qtyBtn plus" (click)="AugmenteQuantiteProduit(pr.id)"><i-bs
+                                                  name="chevron-compact-right"
+                                                  class="text-primary">
+                                                </i-bs></a>
+                                              </div>
+                                          </div>
+                                      </td>
+                                      <td class="text-right small--hide cart-price">
+                                          <div>
+                                            <span class="money" *ngIf="pr.produit?.diminu_price"> {{ multiple(pr.produit?.diminu_price, pr.quantite) }} Fcfa</span>
+                                            <span class="money" *ngIf="!pr.produit?.diminu_price"> {{ multiple(pr.produit?.prix, pr.quantite) }} Fcfa</span>
+                                          </div>
+                                      </td>
+                                      <td class="text-center small--hide"><a (click)="supprimerProduitACommanderDansPanier(pr.id)" class="remove"><i-bs name="trashFill" class="text-danger" ></i-bs></a></td>
+                                  </tr>
+       
+                   
+                              </tbody>
+                          <tfoot>
+                                  <tr>
+                                      <td colspan="3" class="text-left"><a href="#" class="btn--link cart-continue"><i class="icon icon-arrow-circle-left"></i>Prix Total du Panier</a></td>
+                                      <td colspan="3" class="text-right"><button type="submit" name="update" class="btn--link cart-update"><i class="fa fa-refresh"></i> <span *ngIf="prixTotalPanierFinal" class="money">{{prixTotalPanierFinal}} Fcfa</span><span *ngIf="!prixTotalPanierFinal" class="money">{{prixTotalPanier}} Fcfa</span></button></td>
+                                  </tr>
+                              </tfoot>
+                      </table>
+                      
+                      <div class="currencymsg">Nous traitons toutes les commandes en USD. Alors que le contenu de votre panier est actuellement affiché en USD, la caisse utilisera les USD au taux de change le plus actuel.</div>
+                      <hr>
+            <div id="shipping-calculator" class="mb-4">
+                        <h5 class="small--text-center">Obtenez des estimations d'expédition</h5>
+                          <div class="row">
+                            <div class="col-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="address_country">Pays</label>
+                                  <select id="address_country" name="address[country]" data-default="United States"><option value="Belgium" data-provinces="[]">Belgium</option>
+                                          <option value="---" data-provinces="[]">---</option>
+                                          <option value="Afghanistan" data-provinces="[]">Togo</option>
+            
+                                        </select>
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label>Ville</label>
+                                  <select id="address_province" name="address[province]" data-default="">
+                                        <option value="Alabama">Alabama</option>
+                              
+                                      </select>
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-12 col-md-4">
+                                <div class="form-group">
+                                    <label for="address_zip">Code postal/Zip</label>
+                                  <input type="text" id="address_zip" name="address[zip]">
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-12 col-md-12 actionRow text-center">
+                      <div><input type="button" class="btn btn--secondary get-rates" value="Calculate shipping"></div>
+                  </div>
+                          </div>
+                      </div> 
+                      
+                      </form>
+                      <div class="total" *ngIf="productsACommander?.length === 0 || productsACommander === undefined">
+                        <div class="total-in">
+                            <span class="label">PANIER VIDE</span>
+                          </div>
+                      
+                      </div>              
+                   </div>
+                  <div class="col-12 col-sm-12 col-md-4 col-lg-4 cart__footer">
+                    <div class="cart-note">
+                        <div class="solid-border">
+                <h5><label for="CartSpecialInstructions" class="cart-note__label small--text-center">Ajouter une note à votre commande</label></h5>
+                <textarea name="note" id="CartSpecialInstructions" class="cart-note__input"></textarea>
+              </div>
+                      </div>
+                      <div class="solid-border">
+                        <div class="row">
+                          <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Total</strong></span>
+                          <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span *ngIf="prixTotalPanierFinal" class="money">{{prixTotalPanierFinal}} Fcfa</span><span *ngIf="!prixTotalPanierFinal" class="money">{{prixTotalPanier}} Fcfa</span></span>
+                        </div>
+                        <div class="cart__shipping">Expédition &amp; taxes calculées à la caisse</div>
+                        <p class="cart_tearm">
+                          <label>
+                            <input type="checkbox" name="tearm" id="cartTearm" class="checkbox" value="tearm" required="">
+                            Je suis d'accord avec les termes et conditions</label>
+                        </p>
+                        <input type="submit" name="checkout" id="cartCheckout" (click)="showCommandePage()" class="btn checkout" value="Commander" />
+                        <div class="paymnet-img"><img src="assets/images/payment-img.jpg" alt="Payment"></div>
+                      </div>
+  
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+      <!--End Body Content-->

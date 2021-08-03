@@ -1,0 +1,78 @@
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<!-- <img *ngFor="let im of images" src="{{url}}{{im.image}}" id="{{im.id}}" (click)="showOnImageClick(im.id)" alt="" class="image-view">
+ -->
+<!--  <div class="row justify-content-around" id="detail-produit">
+    <div class="col" id="image-detail">
+        <div class="justify-content-start">
+            <div class="card" *ngFor="let im of images" class="image-detail-single" >
+                <img width="100" height="100" class="definition-btn" src="{{url}}{{im?.image}}" id="{{im?.id}}" (click)="showOnImageClick(im?.id)" title="{{produit?.nom}}-image-{{im.id}}" alt="{{produit?.nom}}-image-{{im.id}}" />
+            <div class="espace-element-bottom"></div>
+            </div>
+             
+        </div>
+    </div>
+    <div class="col-5 img-box">
+        <img  width="450" height="439" src="{{url}}{{imageChoice?.image}}" id="{{imageChoice?.id}}" (click)="showOnImageClick(imageChoice?.id)" title="{{produit?.nom}}-image-{{imageChoice.id}}" alt="{{produit?.nom}}-image-{{imageChoice.id}}" />
+    </div>
+    <div class="col-5">
+        <h3 id="title-produit">{{produit.nom}}</h3>
+        <p id="p-categorie"><img width="50" height="50" src="../../assets/images/mayaki/category.png" title="catégorie" alt="catégorie" id="categorie" /> {{categorie.nom}} </p>
+        <p *ngIf="produit.diminu_price" class="item-price">Prix : <span class="old-price">{{produit.prix}} CFA</span> <span>{{produit.diminu_price}} CFA</span></p>
+        <p *ngIf="!produit.diminu_price" class="item-price">Prix : <span>{{produit.prix}} CFA</span></p>
+        <p><span>Quantité totale : </span><span> {{produit.quantite}} </span></p>
+        <p>{{produit.caracteristique}}</p>
+        <blockquote>
+            <p class="text-lg font-semibold">
+              {{produit.caracteristique}}
+            </p>
+          </blockquote>
+        
+    </div>
+</div>
+ -->
+<p style="text-align: center !important; margin-bottom: 25px !important; text-decoration: underline !important;">Produit : {{produit.nom}}</p>
+
+<div style="width: 60% !important; margin: auto !important;">
+    <!-- w-32 h-32 md:h-auto md:rounded-none rounded-full mx-auto  class="md:w-64 md:rounded-none rounded-full mx-auto" -->
+    <div class="d-flex flex-row ">
+        <div class="card" *ngFor="let im of images" class="image-detail-single" >
+            <img class="image-all" width="100" height="100"  src="{{url}}{{im?.image}}" id="{{im?.id}}" (click)="showOnImageClick(im?.id)" title="{{produit?.nom}}-image-{{im.id}}" alt="{{produit?.nom}}-image-{{im.id}}" />
+        <div class="espace-element-bottom"></div>
+        </div>             
+    </div>
+
+    <figure class="md:flex bg-gray-100 rounded-xl p-8 md:p-0">
+
+        <img class="image-principale md:rounded-none rounded-full mx-auto" width="500" height="439" src="{{url}}{{imageChoice?.image}}" id="{{imageChoice?.id}}" (click)="showOnImageClick(imageChoice?.id)" title="{{produit?.nom}}-image-{{imageChoice.id}}" alt="{{produit?.nom}}-image-{{imageChoice.id}}">
+        <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+            <figcaption class="font-medium">
+                <div class="text-cyan-600">
+                    {{produit.nom}}
+                </div>
+                <div *ngIf="produit.diminu_price" class="text-gray-500">
+                    <span class="old-price">{{produit.prix}} CFA</span> <span>{{produit.diminu_price}} CFA</span>
+                </div>
+                <div  *ngIf="!produit.diminu_price" class="text-gray-500">
+                    <span>{{produit.prix}} CFA</span>
+                </div>
+
+                <div class="text-gray-500">
+                    <span>Catégorie : {{categorie.nom}}</span>
+                </div>
+
+                <div class="text-gray-500">
+                    <span>Quatité disponible : {{produit.quantite}}</span>
+                </div>
+
+              </figcaption>
+          <blockquote>
+            <p class="text-lg font-semibold">
+              {{produit.caracteristique}}
+            </p>
+          </blockquote>
+            <button (click)="addProductToCart(produit.id)" class="btn btn-primary">Ajouter au panier</button>
+        </div>
+      </figure>
+      <div style="margin-bottom: 15px !important;"></div>
+</div>
+

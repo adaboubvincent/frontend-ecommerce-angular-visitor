@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+#elements .element {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.contenir-espace-left{
+    margin-left: 25px;
+}
+
+.elements-right, .elements-left {
+    display: inline-block;
+}
+
+.elements-right {
+    float: right;
+}
+
+.margin-right-i, .margin-right {
+    margin-right: 15px;
+}
+
+.margin-right {
+    margin-right: 10px;
+}
+
+/* .barre-prix {
+    list-style: ;
+} */
+
+
+.trim-info { max-width: 250px; 
+    display: inline-block; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    line-height: 15px; 
+    position: relative; 
+}
+
+
+.old-price{
+    margin-right: 15px;
+    text-decoration: line-through;
+    color: darksalmon !important;
+}
+body{
+    background-color: #ffffff !important;
+}
+
+.fg-color-site{
+    color: #1b6f6b !important;
+}
+.bg-color-site{
+    background-color: #1b6f6b !important;
+}

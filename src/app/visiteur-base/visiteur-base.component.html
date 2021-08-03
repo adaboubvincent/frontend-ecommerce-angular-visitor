@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<!-- belle/index.html   11 Nov 2019 12:16:10 GMT -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>mayaki</title>
+<meta name="description" content="description">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicon -->
+<link rel="shortcut icon" href="../../assets/images/favicon.png" />
+</head>
+
+<body class="template-index belle template-index-belle">
+<!-- <div id="pre-loader">
+    <img src="../../assets/images/loader.gif" alt="Loading..." />
+</div> -->
+<div class="pageWrapper">
+        <!--Search Form Drawer-->
+        <div class="search-person">
+          <div class="search__form">
+              <form class="search-bar__form" (ngSubmit)="search()">
+                  <input class="search__input" id="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+              </form>
+             
+          </div>
+      </div>
+      <!--End Search Form Drawer
+       <button type="button" class="search-trigger close-btn"><i class="icon anm anm-times-l"></i></button>
+      -->
+      <!--Top Header-->
+      <div class="top-header">
+      <div class="container-fluid">
+          <div class="row bg-color-site">
+            <div class="col-10 col-sm-8 col-md-5 col-lg-4">
+                  
+                  <p class="phone-no"><i class="fa fa-phone"></i> +228 00 00 87 87</p>
+              </div>
+              <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
+                <div class="text-center"><p class="top-header_middle-text"></p></div>
+              </div>
+              <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
+                <span class="user-menu d-block d-lg-none user-show-ul" (click)="userShowUl()" ><i class="fa fa-user" aria-hidden="true"></i></span>
+                  <ul class="customer-links list-inline">
+                      <li *ngIf="username == ''"><a routerLink="login">S'authentifier</a></li>
+                      <li *ngIf="username == ''"><a routerLink="register">Creer un compte</a></li>
+
+                      <li *ngIf="username != ''"><a style="cursor: pointer;" routerLink="profile" >Profile</a></li>
+                      <li *ngIf="username != ''"><a style="cursor: pointer;" (click)="logout()" id="logout" >Se déconnecter</a></li>
+                      <li *ngIf="is_superuser === 'true'"><a href="http://localhost:8001/" (click)="showPageAdmin()" >Aller sur la page Admin</a></li>
+                      
+                    </ul>
+              </div>
+              
+          </div>
+      </div>
+  </div>
+      <!--End Top Header-->
+      <!--Header-->
+      <div class="header-wrap animated d-flex">
+          <div class="container-fluid">        
+              <div class="row align-produits-center">
+                  <!--Desktop Logo-->
+                  <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                      <a href="#">
+                          <img  height="50" width="50" src="../../assets/images/Logo.png" alt="Ya" title="Ya" />
+                      </a>
+                  </div>
+                  <!--End Desktop Logo-->
+                  <div class="col-2 col-sm-3 col-md-3 col-lg-8">
+                      <div class="d-block d-lg-none">
+                          <button type="button" id="bars-open" (click)="clickBars()" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                             
+                              <i class="icon fa fa-bars" style="color: black;"></i>
+                          </button>
+                          <button type="button" (click)="clickTimes()" id="times-close" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
+                            <i class="icon fa fa-times"></i>
+                            
+                        </button>
+                      </div>
+                      <!--Desktop Menu-->
+                      <nav class="grid__produit" id="AccessibleNav"><!-- for mobile -->
+                          <ul id="siteNav" class="site-nav medium center hidearrow">
+                            <li class="lvl1"><a routerLink="">Accueil </a>
+                             
+                              </li>
+                              <li class="lvl1 parent megamenu"><a  style="cursor: pointer;">Produits <i class="fa fa-angle-down"></i></a>
+                                <div class="megamenu style2">
+                                      <ul class="mmWrapper">
+                                          <li class="grid__item one-whole">
+                                              <ul class="grid">
+                                                  <li class="grid__item lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1">Catégories</a>
+                                                      <ul class="subLinks">
+                                                          <li *ngFor="let cat of categories" class="lvl-2"><a style="cursor: pointer;" (click)="searchByCategory(cat.nom)" class="site-nav lvl-2">{{cat.nom}}</a></li>
+                                                      </ul>
+                                                  </li>
+                                                  
+                                              </ul>
+                                          </li>
+                                          
+                                          <li class="grid__item large-up--one-whole imageCol"><a href="#"><img src="assets/images/megamenu-bg2.jpg" alt=""></a></li>
+                                      </ul>
+                                  </div>
+                              </li>
+                              <!-- <li class="lvl1"><a href="{% url 'core:home' %}">CGU <i class="anm anm-angle-down-l"></i></a> -->
+                            
+                              <li class="lvl1"><a href="%23/contact">Contact</a></li>
+                             <!--  <li class="md:flex lvl1"><a href="#" class="site-header__cart" title="Cart" data-toggle="modal" data-target="#exampleModalCenter">
+                                
+                                <span id="CartCount" class="site-header__cart-count" data-cart-render="produit_count">
+                                  {{productsACommander?.length}}
+                                  <i-bs name="cartFill" class="text-danger" ></i-bs>
+                                </span>
+                            </a></li> -->
+                            <li class="lvl1">
+                                <button type="button" class="btn search-trigger search-show-search bg-white"><i-bs name="search" class="text-dark" ></i-bs></button>
+                            </li>
+
+                            <!--Minicart Popup-->
+                      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Mon panier</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              
+
+                              <ul class="mini-products-list" *ngIf="productsACommander?.length !== 0">
+                              
+                                <li class="produit" *ngFor="let pr of productsACommander">
+                                  <a class="product-image" href="#">
+                                      <img src="{{url}}{{pr.image?.image}}" alt="{{pr.produit?.nom}}" title="{{pr.produit?.nom}}" />
+                                      
+                                    </a>
+                                    <div class="product-details">
+                                      <a (click)="supprimerProduitACommanderDansPanier(pr.id)" class="remove"><i-bs name="trashFill" class="text-danger" ></i-bs></a>
+                                       
+                                        <div class="variant-cart">{{pr.produit?.nom}}</div>
+                                        <div class="wrapQtyBtn margin-right">
+                                            <div class="qtyField">
+                                                <a class="qtyBtn minus" (click)="DiminuQuantiteProduit(pr.id)" ><i-bs
+                                                  name="chevron-compact-left"
+                                                  class="text-primary">
+                                                </i-bs></a>
+                                                <input type="text" name="quantity" value="{{pr.quantite}}" class="product-form__input qty">
+                                                <a class="qtyBtn plus" (click)="AugmenteQuantiteProduit(pr.id)"><i-bs
+                                                  name="chevron-compact-right"
+                                                  class="text-primary">
+                                                </i-bs></a>
+                                            </div>
+                                        </div>
+                                        <div class="priceRow">
+                                          <div class="product-price">
+                                              <span class="money" *ngIf="pr.produit?.diminu_price"> {{ multiple(pr.produit?.diminu_price, pr.quantite) }} Fcfa</span>
+                                              <span class="money" *ngIf="!pr.produit?.diminu_price"> {{ multiple(pr.produit?.prix, pr.quantite) }} Fcfa</span>
+                                            </div>
+                                         </div>
+                                  </div>
+                                </li>
+                               
+                               
+                              
+                            </ul>
+
+
+
+                            <div class="total" *ngIf="productsACommander?.length !== 0">
+                              <div class="total-in">
+                                  <span class="label">Prix Total du Panier:</span><span class="product-price"><span *ngIf="prixTotalPanierFinal" class="money">{{prixTotalPanierFinal}} Fcfa</span><span *ngIf="!prixTotalPanierFinal" class="money">{{prixTotalPanier}} Fcfa</span></span>
+                                </div>
+                                 <div class="buttonSet text-center">
+                                    <a routerLink="#/mon-panier" class="btn btn-secondary btn--small" data-dismiss="modal">Afficher le panier</a>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="total" *ngIf="productsACommander?.length === 0 || productsACommander === undefined">
+                              <div class="total-in">
+                                  <span class="label">PANIER VIDE</span>
+                                </div>
+                            
+                            </div>
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <!-- End Minicart Popup -->
+
+
+                        </ul>
+                      </nav>
+                      <!--End Desktop Menu-->
+                
+                <!--Mobile Logo-->
+                  </div>
+                  <!-- <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo"> -->
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                      <div class="logo">
+                            <a href="index.html">
+                                <img height="50" width="50" src="../../assets/images/Logo.png" alt="Ya" title="Ya" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-4 col-sm-3 col-md-3 col-lg-2">
+                      <div id="cart-pc" class="btn site-header__cart" title="Cart" data-toggle="modal" data-target="#exampleModalCenter">
+                                
+                          <span id="CartCount" class="site-header__cart-count" data-cart-render="produit_count">
+                            {{productsACommander?.length}}
+                           
+                          </span>
+                          <span> <i-bs name="cartFill" class="text-success" ></i-bs></span>
+                      
+                      </div>
+                      <div id="cart-mobile" class="site-header__cart" title="Cart">
+                                
+                        <span id="CartCount" class="site-header__cart-count" data-cart-render="produit_count" (click)="cartMobile()">
+                          {{productsACommander?.length}}
+                         
+                        </span>
+                        <button type="button" (click)="cartMobile()"> <i-bs name="cartFill" class="text-success" ></i-bs></button>
+                        <div class="site-header__search">
+                          <button type="button" class="search-trigger search-show-search"><i class="icon fa fa-search"></i></button>
+                        </div>
+                    </div>
+                    <!-- ici cart 001 -->
+
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                  
+                  <div class="site-cart">
+                    	
+                    <!--Minicart Popup-->
+                    <div id="" class="block block-cart">
+                      
+                      
+                      <h2 class="text text-center title-mon-panier">Mon panier</h2>
+                      <div class="">
+                          
+
+                        <ul class="mini-products-list" *ngIf="productsACommander?.length !== 0">
+                        
+                          <li class="produit" *ngFor="let pr of productsACommander">
+                            <a class="product-image" href="#">
+                                <img src="{{url}}{{pr.image?.image}}" alt="{{pr.produit?.nom}}" title="{{pr.produit?.nom}}" />
+                                
+                              </a>
+                              <div class="product-details">
+                                <a (click)="supprimerProduitACommanderDansPanier(pr.id)" class="remove"><i-bs name="trashFill" class="text-danger" ></i-bs></a>
+                                 
+                                  <div class="variant-cart">{{pr.produit?.nom}}</div>
+                                  <div class="wrapQtyBtn margin-right">
+                                      <div class="qtyField">
+                                          <a class="qtyBtn minus" (click)="DiminuQuantiteProduit(pr.id)" ><i-bs
+                                            name="chevron-compact-left"
+                                            class="text-primary">
+                                          </i-bs></a>
+                                          <input type="text" name="quantity" value="{{pr.quantite}}" class="product-form__input qty">
+                                          <a class="qtyBtn plus" (click)="AugmenteQuantiteProduit(pr.id)"><i-bs
+                                            name="chevron-compact-right"
+                                            class="text-primary">
+                                          </i-bs></a>
+                                      </div>
+                                  </div>
+                                  <div class="priceRow">
+                                    <div class="product-price">
+                                        <span class="money" *ngIf="pr.produit?.diminu_price"> {{ multiple(pr.produit?.diminu_price, pr.quantite) }} Fcfa</span>
+                                        <span class="money" *ngIf="!pr.produit?.diminu_price"> {{ multiple(pr.produit?.prix, pr.quantite) }} Fcfa</span>
+                                      </div>
+                                   </div>
+                            </div>
+                          </li>
+                         
+                         
+                        
+                      </ul>
+
+
+
+                      <div class="total" *ngIf="productsACommander?.length !== 0">
+                        <div class="total-in">
+                            <span class="text text-center">Prix Total du Panier:</span><span class="product-price text text-center"><span *ngIf="prixTotalPanierFinal" class="money">{{prixTotalPanierFinal}} Fcfa</span><span *ngIf="!prixTotalPanierFinal" class="money">{{prixTotalPanier}} Fcfa</span></span>
+                          </div>
+                           <div class="buttonSet text-center">
+                              <a routerLink="#/mon-panier" (click)="displayNonePanierMobile()" class="btn btn-secondary btn--small" data-dismiss="modal">Afficher le panier</a>
+                              
+                          </div>
+                      </div>
+                      
+                      <div class="total" *ngIf="productsACommander?.length === 0 || productsACommander === undefined">
+                        <div class="total-in">
+                            <span class="label">PANIER VIDE</span>
+                          </div>
+                      
+                      </div>
+
+                      </div>
+
+
+
+                    </div>
+                    <!--EndMinicart Popup-->
+                </div>
+
+
+
+
+
+
+
+
+
+
+                  
+              </div>
+          </div>
+          
+      </div>
+      <!--End Header-->
+
+
+
+
+
+
+
+
+
+      <!--Mobile Menu-->
+    <div class="NavbarItems" role="navigation">
+          <ul id="MobileNav" class="nav-menu">
+            <li class="lvl1 parent megamenu"><a routerLink="">Accueil</a></li>
+            <li class="lvl1 parent megamenu"><a routerLink="">Produits</a></li>
+            <li class="lvl1 parent megamenu"><a routerLink="">Contact</a></li>
+            
+           
+            <!-- <li class="lvl1"><a href="#"><b>Buy Now!</b></a></li> -->
+          
+        </ul>
+    </div>
+    <!--End Mobile Menu-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div id="page-content">
+          <!--Collection Tab slider-->
+          <router-outlet></router-outlet>
+          <!--Collection Tab slider-->
+          
+
+      </div>
+      <!--End Body Content-->
+    
+    <!--Footer-->
+    
+    <div class="footer-class-css">
+      <!-- container my-5 * -->
+      <footer class="text-center text-lg-start text-dark" style="background-color: #ECEFF1; margin-top: 115px !important;">
+                  
+          <section class="d-flex justify-content-between p-4 text-white" style="background-color: #1b6f6b" >
+                      
+              <div class="me-5">
+                  <span>Avez vous des produits à mettre en ligne ? </span>
+              </div>
+
+              <div class="me-5">
+              <button type="button" class="btn btn-secondary btn-lg btn-block">Mettre mon produit en ligne</button>
+              </div>
+              
+              <div>
+                  <a href="#" class="text-white me-4">
+                      <i class="fa fa-facebook-f"></i>
+                  </a>
+                  <a href="" class="text-white me-4">
+                      <i class="fa fa-twitter"></i>
+                  </a>
+                  <a href="" class="text-white me-4">
+                      <i class="fa fa-google"></i>
+                  </a>
+                  <a href="" class="text-white me-4">
+                      <i class="fa fa-instagram"></i>
+                  </a>
+                  <a href="" class="text-white me-4">
+                      <i class="fa fa-linkedin"></i>
+                  </a>
+                  <a href="" class="text-white me-4">
+                      <i class="fa fa-github"></i>
+                  </a>
+              </div>
+              
+              </section>
+              
+              <section class="">
+              <div class="container text-center text-md-start mt-5">
+                  
+                  <div class="row mt-3">
+                      
+                  <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                      
+                      <h6 class="text-uppercase fw-bold">NOM 6666666</h6>
+                      <hr class="mb-4 mt-0 d-inline-block mx-auto" 
+                          style="background-color: #7c4dff; width: 60px; height: 2px;" />
+                          <p>
+                          Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias doloremque culpa, delectus distinctio soluta nesciunt quod dolorum mollitia laudantium vel maiores eveniet repellat velit commodi quas explicabo veniam reiciendis cupiditate!
+                          </p>
+                      </div>
+                  
+                      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+                          <h6 class="text-uppercase fw-bold">Products</h6>
+                          <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                              style="background-color: #7c4dff; width: 60px; height: 2px;" />
+                          <p> <a href="#!" class="text-dark">Solutions</a> </p>
+                          <p> <a href="#!" class="text-dark">Produits</a></p>
+                          <p> <a href="#!" class="text-dark">Fournisseurs</a></p>
+                      </div>
+                  
+                      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                      <h6 class="text-uppercase fw-bold">Contact</h6>
+                          <hr
+                          class="mb-4 mt-0 d-inline-block mx-auto"
+                              style="background-color: #7c4dff; width: 60px; height: 2px;"
+                              />
+                          <p><i class="fa fa-home mr-3"></i>Lomé, RUE ----, TOGO</p>
+                          <p><i class="fa fa-envelope mr-3"></i> vincent@gmail.com</p>
+                          <p><i class="fa fa-phone mr-3"></i> + 228 333 567 88</p>
+                          <p><i class="fa fa-print mr-3"></i> + 228 222 567 89</p>
+                          
+                      </div>
+                  
+                      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                      <h6 class="text-uppercase fw-bold">Abonne-toi à MAYAKI</h6>
+                          <hr
+                          class="mb-4 mt-0 d-inline-block mx-auto"
+                              style="background-color: #7c4dff; width: 60px; height: 2px;"
+                              />
+                          
+                          <div class="form-outline form-white mb-4">
+                              <input type="email" id="form5Example2" class="form-control" />
+                          </div>
+                          
+                          <p>
+                          En renseignant votre adresse mail vous acceptez de recevoir notre newsletter. Vous pouvez vous désinscrire à tout moment, et exercer vos droits d'accès, de rectification, de suppression, de portabilité et de limitation en envoyant un mail à dpo@goldenbees.fr. Voir notre politique de confidentialité.
+                          </p>
+                          <button type="submit" class="btn btn-info btn-circle btn-xl">Je m'inscris</button><br />
+                          <br />
+                          <p>
+                              <a href="#!" class="text-dark">Ton compte</a>
+                          </p>
+                          <p>
+                              <a href="#!" class="text-dark">Devenir un Fournisseur</a>
+                          </p>
+                          <p>
+                              <a href="#!" class="text-dark">Boutiques</a>
+                          </p>
+                          <p>
+                              <a href="#!" class="text-dark">Aide</a>
+                          </p>
+                          
+                      </div>
+                  
+                  </div>
+                  
+              </div>
+          </section>
+          
+          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)" > © 2020 Copyright:
+              <a class="text-dark" href="#" >vincentdepaul.com</a>
+          </div>
+      </footer>
+  </div>
+
+
+    <!--End Footer-->
+    <!--Scoll Top-->
+    <span id="site-scroll"><i class="icon fa fa-angle-up"></i></span>
+    <!--End Scoll Top-->
+    
+   </div>
+</body>
+
+<!-- belle/index.html   11 Nov 2019 12:20:55 GMT -->
+</html>
