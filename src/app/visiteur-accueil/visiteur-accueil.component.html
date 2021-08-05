@@ -1,4 +1,19 @@
-
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" style=" .container{ margin: 0px auto !important;}">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="../../assets/images/dash/caroussel.png" alt="First slide">
+    </div>
+  <div class="carousel-item ">
+      <img class="d-block w-100" src="../../assets/images/dash/0b21fe56e3fa9b25f09b468c8cc231e0.jpg" alt="First slide">
+    </div>
+  <div class="carousel-item">
+      <img class="d-block w-100" src="../../assets/images/dash/4e52251f168aa11b1da3637f27e9a38c.jpg" alt="Third slide">
+    </div>
+  <div class="carousel-item">
+      <img class="d-block w-100" src="../../assets/images/dash/f71a836f917eb2804b04051cd589d187.jpg" alt="Third slide">
+    </div>
+  </div>
+</div>
 <div class="tab-slider-product section">
     <div class="container">
         <div class="row">
@@ -49,7 +64,8 @@
                                 bottom: -20px;
                             }
                             .carousel {
-                                margin: 50px auto;
+                                margin-left: 50px;
+                                margin-right: 50px;
                                 padding: 0 70px;
                             }
                             .carousel .carousel-item {
@@ -173,7 +189,7 @@
                                 <h1 *ngIf="estCommande">Votre commande a été éffectuée avec succès.\nVous serez livrés dans 5 jours.</h1>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Les derniers <b>Articles</b></h2>
+                                        <h2>Les derniers <b style="color: #0f6674">Articles</b></h2>
                                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
@@ -387,6 +403,43 @@
         </div>
     </div>
 </div>
+
+
+<div class="container" *ngIf="produits.length !== 0">
+  <h3 class="h3"> Dans notre boutique </h3>
+  <div class="row" >
+    <div class="col-md-3 col-sm-6"*ngFor="let pr of produits" style="margin-bottom: 7px;">
+      <div class="product-grid">
+        <div class="product-image">
+          <a href="#">
+            <img class="pic-1" src="{{url}}{{pr.image?.image}}" (click)="showPageDetailProduit(pr?.id)" style="height: 150px; width: 180px;">
+            <img class="pic-2" src="{{url}}{{pr.image?.image}}" (click)="showPageDetailProduit(pr?.id)" style="height: 150px; width: 180px; ">
+          </a>
+          <ul class="social">
+            <li><a (click)="showPageDetailProduit(pr?.id)" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+            <li><a (click)="addProductToCart(pr.id)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+          </ul>
+        </div>
+        <ul class="rating">
+          <li class="fa fa-star"></li>
+          <li class="fa fa-star"></li>
+          <li class="fa fa-star"></li>
+          <li class="fa fa-star"></li>
+          <li class="fa fa-star disable"></li>
+        </ul>
+        <div class="product-content">
+          <h3 class="title"><a href="#">{{pr.nom}}</a></h3>
+          <div class="price" *ngIf="pr.diminu_price"> {{pr.diminu_price}} CFA
+            <span> {{pr.prix}} CFA</span>
+          </div>
+          <a class="add-to-cart" (click)="addProductToCart(pr.id)">+ ajouter au panier <i class="fa fa-shopping-cart"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+
 
 
 

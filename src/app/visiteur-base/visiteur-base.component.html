@@ -23,7 +23,7 @@
               <form class="search-bar__form" (ngSubmit)="search()">
                   <input class="search__input" id="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
               </form>
-             
+
           </div>
       </div>
       <!--End Search Form Drawer
@@ -34,7 +34,7 @@
       <div class="container-fluid">
           <div class="row bg-color-site">
             <div class="col-10 col-sm-8 col-md-5 col-lg-4">
-                  
+
                   <p class="phone-no"><i class="fa fa-phone"></i> +228 00 00 87 87</p>
               </div>
               <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
@@ -49,17 +49,17 @@
                       <li *ngIf="username != ''"><a style="cursor: pointer;" routerLink="profile" >Profile</a></li>
                       <li *ngIf="username != ''"><a style="cursor: pointer;" (click)="logout()" id="logout" >Se déconnecter</a></li>
                       <li *ngIf="is_superuser === 'true'"><a href="http://localhost:8001/" (click)="showPageAdmin()" >Aller sur la page Admin</a></li>
-                      
+
                     </ul>
               </div>
-              
+
           </div>
       </div>
   </div>
       <!--End Top Header-->
       <!--Header-->
       <div class="header-wrap animated d-flex">
-          <div class="container-fluid">        
+          <div class="container-fluid">
               <div class="row align-produits-center">
                   <!--Desktop Logo-->
                   <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
@@ -71,19 +71,19 @@
                   <div class="col-2 col-sm-3 col-md-3 col-lg-8">
                       <div class="d-block d-lg-none">
                           <button type="button" id="bars-open" (click)="clickBars()" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
-                             
+
                               <i class="icon fa fa-bars" style="color: black;"></i>
                           </button>
                           <button type="button" (click)="clickTimes()" id="times-close" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open">
                             <i class="icon fa fa-times"></i>
-                            
+
                         </button>
                       </div>
                       <!--Desktop Menu-->
                       <nav class="grid__produit" id="AccessibleNav"><!-- for mobile -->
                           <ul id="siteNav" class="site-nav medium center hidearrow">
                             <li class="lvl1"><a routerLink="">Accueil </a>
-                             
+
                               </li>
                               <li class="lvl1 parent megamenu"><a  style="cursor: pointer;">Produits <i class="fa fa-angle-down"></i></a>
                                 <div class="megamenu style2">
@@ -95,19 +95,19 @@
                                                           <li *ngFor="let cat of categories" class="lvl-2"><a style="cursor: pointer;" (click)="searchByCategory(cat.nom)" class="site-nav lvl-2">{{cat.nom}}</a></li>
                                                       </ul>
                                                   </li>
-                                                  
+
                                               </ul>
                                           </li>
-                                          
+
                                           <li class="grid__item large-up--one-whole imageCol"><a href="#"><img src="assets/images/megamenu-bg2.jpg" alt=""></a></li>
                                       </ul>
                                   </div>
                               </li>
                               <!-- <li class="lvl1"><a href="{% url 'core:home' %}">CGU <i class="anm anm-angle-down-l"></i></a> -->
-                            
+
                               <li class="lvl1"><a href="%23/contact">Contact</a></li>
                              <!--  <li class="md:flex lvl1"><a href="#" class="site-header__cart" title="Cart" data-toggle="modal" data-target="#exampleModalCenter">
-                                
+
                                 <span id="CartCount" class="site-header__cart-count" data-cart-render="produit_count">
                                   {{productsACommander?.length}}
                                   <i-bs name="cartFill" class="text-danger" ></i-bs>
@@ -128,18 +128,18 @@
                               </button>
                             </div>
                             <div class="modal-body">
-                              
+
 
                               <ul class="mini-products-list" *ngIf="productsACommander?.length !== 0">
-                              
+
                                 <li class="produit" *ngFor="let pr of productsACommander">
                                   <a class="product-image" href="#">
                                       <img src="{{url}}{{pr.image?.image}}" alt="{{pr.produit?.nom}}" title="{{pr.produit?.nom}}" />
-                                      
+
                                     </a>
                                     <div class="product-details">
                                       <a (click)="supprimerProduitACommanderDansPanier(pr.id)" class="remove"><i-bs name="trashFill" class="text-danger" ></i-bs></a>
-                                       
+
                                         <div class="variant-cart">{{pr.produit?.nom}}</div>
                                         <div class="wrapQtyBtn margin-right">
                                             <div class="qtyField">
@@ -162,9 +162,9 @@
                                          </div>
                                   </div>
                                 </li>
-                               
-                               
-                              
+
+
+
                             </ul>
 
 
@@ -175,15 +175,15 @@
                                 </div>
                                  <div class="buttonSet text-center">
                                     <a routerLink="#/mon-panier" class="btn btn-secondary btn--small" data-dismiss="modal">Afficher le panier</a>
-                                    
+
                                 </div>
                             </div>
-                            
+
                             <div class="total" *ngIf="productsACommander?.length === 0 || productsACommander === undefined">
                               <div class="total-in">
                                   <span class="label">PANIER VIDE</span>
                                 </div>
-                            
+
                             </div>
 
                             </div>
@@ -192,7 +192,7 @@
                             </div>
                           </div>
                         </div>
-                        
+
                       </div>
                       <!-- End Minicart Popup -->
 
@@ -200,7 +200,7 @@
                         </ul>
                       </nav>
                       <!--End Desktop Menu-->
-                
+
                 <!--Mobile Logo-->
                   </div>
                   <!-- <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo"> -->
@@ -213,19 +213,19 @@
                     </div>
                     <div class="col-4 col-sm-3 col-md-3 col-lg-2">
                       <div id="cart-pc" class="btn site-header__cart" title="Cart" data-toggle="modal" data-target="#exampleModalCenter">
-                                
+
                           <span id="CartCount" class="site-header__cart-count" data-cart-render="produit_count">
                             {{productsACommander?.length}}
-                           
+
                           </span>
                           <span> <i-bs name="cartFill" class="text-success" ></i-bs></span>
-                      
+
                       </div>
                       <div id="cart-mobile" class="site-header__cart" title="Cart">
-                                
+
                         <span id="CartCount" class="site-header__cart-count" data-cart-render="produit_count" (click)="cartMobile()">
                           {{productsACommander?.length}}
-                         
+
                         </span>
                         <button type="button" (click)="cartMobile()"> <i-bs name="cartFill" class="text-success" ></i-bs></button>
                         <div class="site-header__search">
@@ -247,27 +247,27 @@
 
 
 
-                  
+
                   <div class="site-cart">
-                    	
+
                     <!--Minicart Popup-->
                     <div id="" class="block block-cart">
-                      
-                      
+
+
                       <h2 class="text text-center title-mon-panier">Mon panier</h2>
                       <div class="">
-                          
+
 
                         <ul class="mini-products-list" *ngIf="productsACommander?.length !== 0">
-                        
+
                           <li class="produit" *ngFor="let pr of productsACommander">
                             <a class="product-image" href="#">
                                 <img src="{{url}}{{pr.image?.image}}" alt="{{pr.produit?.nom}}" title="{{pr.produit?.nom}}" />
-                                
+
                               </a>
                               <div class="product-details">
                                 <a (click)="supprimerProduitACommanderDansPanier(pr.id)" class="remove"><i-bs name="trashFill" class="text-danger" ></i-bs></a>
-                                 
+
                                   <div class="variant-cart">{{pr.produit?.nom}}</div>
                                   <div class="wrapQtyBtn margin-right">
                                       <div class="qtyField">
@@ -290,9 +290,9 @@
                                    </div>
                             </div>
                           </li>
-                         
-                         
-                        
+
+
+
                       </ul>
 
 
@@ -303,15 +303,15 @@
                           </div>
                            <div class="buttonSet text-center">
                               <a routerLink="#/mon-panier" (click)="displayNonePanierMobile()" class="btn btn-secondary btn--small" data-dismiss="modal">Afficher le panier</a>
-                              
+
                           </div>
                       </div>
-                      
+
                       <div class="total" *ngIf="productsACommander?.length === 0 || productsACommander === undefined">
                         <div class="total-in">
                             <span class="label">PANIER VIDE</span>
                           </div>
-                      
+
                       </div>
 
                       </div>
@@ -331,10 +331,10 @@
 
 
 
-                  
+
               </div>
           </div>
-          
+
       </div>
       <!--End Header-->
 
@@ -352,50 +352,13 @@
             <li class="lvl1 parent megamenu"><a routerLink="">Accueil</a></li>
             <li class="lvl1 parent megamenu"><a routerLink="">Produits</a></li>
             <li class="lvl1 parent megamenu"><a routerLink="">Contact</a></li>
-            
-           
+
+
             <!-- <li class="lvl1"><a href="#"><b>Buy Now!</b></a></li> -->
-          
+
         </ul>
     </div>
     <!--End Mobile Menu-->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -404,27 +367,27 @@
           <!--Collection Tab slider-->
           <router-outlet></router-outlet>
           <!--Collection Tab slider-->
-          
+
 
       </div>
       <!--End Body Content-->
-    
+
     <!--Footer-->
-    
+
     <div class="footer-class-css">
       <!-- container my-5 * -->
       <footer class="text-center text-lg-start text-dark" style="background-color: #ECEFF1; margin-top: 115px !important;">
-                  
+
           <section class="d-flex justify-content-between p-4 text-white" style="background-color: #1b6f6b" >
-                      
+
               <div class="me-5">
                   <span>Avez vous des produits à mettre en ligne ? </span>
               </div>
 
               <div class="me-5">
-              <button type="button" class="btn btn-secondary btn-lg btn-block">Mettre mon produit en ligne</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block">Mettre mon produit en ligne</button>
               </div>
-              
+
               <div>
                   <a href="#" class="text-white me-4">
                       <i class="fa fa-facebook-f"></i>
@@ -445,24 +408,24 @@
                       <i class="fa fa-github"></i>
                   </a>
               </div>
-              
+
               </section>
-              
+
               <section class="">
               <div class="container text-center text-md-start mt-5">
-                  
+
                   <div class="row mt-3">
-                      
+
                   <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                      
+
                       <h6 class="text-uppercase fw-bold">NOM 6666666</h6>
-                      <hr class="mb-4 mt-0 d-inline-block mx-auto" 
+                      <hr class="mb-4 mt-0 d-inline-block mx-auto"
                           style="background-color: #7c4dff; width: 60px; height: 2px;" />
                           <p>
                           Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias doloremque culpa, delectus distinctio soluta nesciunt quod dolorum mollitia laudantium vel maiores eveniet repellat velit commodi quas explicabo veniam reiciendis cupiditate!
                           </p>
                       </div>
-                  
+
                       <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
 
                           <h6 class="text-uppercase fw-bold">Products</h6>
@@ -472,7 +435,7 @@
                           <p> <a href="#!" class="text-dark">Produits</a></p>
                           <p> <a href="#!" class="text-dark">Fournisseurs</a></p>
                       </div>
-                  
+
                       <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                       <h6 class="text-uppercase fw-bold">Contact</h6>
                           <hr
@@ -483,20 +446,20 @@
                           <p><i class="fa fa-envelope mr-3"></i> vincent@gmail.com</p>
                           <p><i class="fa fa-phone mr-3"></i> + 228 333 567 88</p>
                           <p><i class="fa fa-print mr-3"></i> + 228 222 567 89</p>
-                          
+
                       </div>
-                  
+
                       <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                       <h6 class="text-uppercase fw-bold">Abonne-toi à MAYAKI</h6>
                           <hr
                           class="mb-4 mt-0 d-inline-block mx-auto"
                               style="background-color: #7c4dff; width: 60px; height: 2px;"
                               />
-                          
+
                           <div class="form-outline form-white mb-4">
                               <input type="email" id="form5Example2" class="form-control" />
                           </div>
-                          
+
                           <p>
                           En renseignant votre adresse mail vous acceptez de recevoir notre newsletter. Vous pouvez vous désinscrire à tout moment, et exercer vos droits d'accès, de rectification, de suppression, de portabilité et de limitation en envoyant un mail à dpo@goldenbees.fr. Voir notre politique de confidentialité.
                           </p>
@@ -514,14 +477,14 @@
                           <p>
                               <a href="#!" class="text-dark">Aide</a>
                           </p>
-                          
+
                       </div>
-                  
+
                   </div>
-                  
+
               </div>
           </section>
-          
+
           <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)" > © 2020 Copyright:
               <a class="text-dark" href="#" >vincentdepaul.com</a>
           </div>
@@ -533,7 +496,7 @@
     <!--Scoll Top-->
     <span id="site-scroll"><i class="icon fa fa-angle-up"></i></span>
     <!--End Scoll Top-->
-    
+
    </div>
 </body>
 
