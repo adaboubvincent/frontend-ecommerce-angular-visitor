@@ -10,4 +10,5 @@ export class User{
     password1?: string;
     password2?: string;
     is_superuser: boolean = false;
+    is_active: boolean = false;
 }

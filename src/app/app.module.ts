@@ -23,6 +23,9 @@ import { SecurityService } from './services/user/security.service';
 import { AuthGuard } from './services/guard-auth/auth.guard';
 import { TokenInterceptorService } from './services/guard-auth/token-interceptor.service';
 import { ProfileComponent } from './profile/profile.component';
+import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
+import { EmailService } from './services/email/email.service';
+import { PaiementService } from './services/paiement/paiement.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,8 @@ import { ProfileComponent } from './profile/profile.component';
     DetailPanierComponent,
     CommanderComponent,
     ContactComponent,
-    ProfileComponent
+    ProfileComponent,
+    EmailConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,8 @@ import { ProfileComponent } from './profile/profile.component';
     FournisseurService,
     CategoryService,
     SecurityService,
+    EmailService,
+    PaiementService,
     AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,

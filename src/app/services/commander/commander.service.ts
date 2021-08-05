@@ -20,7 +20,7 @@ export class CommanderService extends DaoService<Categorie>{
         'Content-Type': 'application/json',
         'Authorization': 'Token '+token
       }),
-      bodey: token
+      body: token
     };
     return this.http.post<Text>(this.url + "commander/", token, options);
   }

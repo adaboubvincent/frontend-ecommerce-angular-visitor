@@ -33,6 +33,7 @@ export class VisiteurBaseComponent implements OnInit {
 
 	username: string | null = "";
 	is_superuser: string | null = "";
+	role: string | null = "";
 
 	panier: Panier | undefined = new Panier();
 	productsACommander: ProduitACommander[] = [];
@@ -65,10 +66,12 @@ export class VisiteurBaseComponent implements OnInit {
 		localStorage.setItem('username', "");
 		localStorage.setItem('email', "");
 		localStorage.setItem('is_superuser', "");
+		localStorage.setItem('role', "");
 	});
 
 	this.username = localStorage.getItem('username');
 	this.is_superuser = localStorage.getItem('is_superuser');
+	this.role = localStorage.getItem('role');
 
 	this.produitService.getAll("produits/").subscribe((pds: Produit[]) => {
 		this.produits = pds;
@@ -109,9 +112,11 @@ export class VisiteurBaseComponent implements OnInit {
 			localStorage.setItem('username', "");
 			localStorage.setItem('email', "");
 			localStorage.setItem('is_superuser', "");
+			localStorage.setItem('role', "");
 
 			this.username = localStorage.getItem('username');
 			this.is_superuser = localStorage.getItem('is_superuser');
+			this.role = localStorage.getItem('role');
 			window.location.reload();
 		}
 	});
@@ -139,9 +144,11 @@ export class VisiteurBaseComponent implements OnInit {
 	localStorage.setItem('username', "");
 	localStorage.setItem('email', "");
 	localStorage.setItem('is_superuser', "");
+	localStorage.setItem('role', "");
 
 	this.username = localStorage.getItem('username');
 	this.is_superuser = localStorage.getItem('is_superuser');
+	this.role = localStorage.getItem('role');
 
 	this.loadingPage = true;
 	window.location.reload();

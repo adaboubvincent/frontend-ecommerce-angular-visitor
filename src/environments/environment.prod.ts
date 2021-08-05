@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  APIEndpoint: "https://api-mayaki-ecommerce.herokuapp.com"
+  APIEndpoint: "http://127.0.0.1:8000"//"https://api-mayaki-ecommerce.herokuapp.com"
 };

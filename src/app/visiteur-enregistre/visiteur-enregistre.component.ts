@@ -38,18 +38,23 @@ export class VisiteurEnregistreComponent implements OnInit {
       user.password2 = this.formRegister.get('password2')?.value;
       this.securityService.register(user).subscribe((res) => {
         let dict = res;
-        console.log(dict);
-        localStorage.setItem('id', ""+res.user?.id || "0");
-        localStorage.setItem('token', res.token || "");
-        localStorage.setItem('username', res.user?.username || "");
-        localStorage.setItem('email', res.user?.email || "");
-        localStorage.setItem('role', res.user?.role || "");
-        localStorage.setItem('first_name', res.user?.first_name || "");
-        localStorage.setItem('last_name', res.user?.last_name || "");
-        localStorage.setItem('is_superuser', ""+res.user?.is_superuser || "");
-        localStorage.setItem('pageReload', 'true');
-
-        this.securityService.notificationAjouter("Vous avez un compte maintenant!", "success");
+        if(res.user?.is_active == true){
+          localStorage.setItem('id', ""+res.user?.id || "0");
+          localStorage.setItem('token', res.token || "");
+          localStorage.setItem('username', res.user?.username || "");
+          localStorage.setItem('email', res.user?.email || "");
+          localStorage.setItem('role', res.user?.role || "");
+          localStorage.setItem('first_name', res.user?.first_name || "");
+          localStorage.setItem('last_name', res.user?.last_name || "");
+          localStorage.setItem('is_superuser', ""+res.user?.is_superuser || "");
+          localStorage.setItem('role', ""+res.user?.role || "");
+          localStorage.setItem('pageReload', 'true');
+  
+          this.securityService.notificationAjouter("Vous avez un compte maintenant!", "success");
+        }else{
+          this.securityService.notificationAjouter(res?.test || "", "warning");
+        }
+        
         this.route.navigateByUrl('');
 
         /* let panier = new Panier();

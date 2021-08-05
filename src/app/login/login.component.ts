@@ -34,16 +34,20 @@ export class LoginComponent implements OnInit {
     this.securityService.login(user).subscribe((res) => {
       this.incorrectsInfos = false;
       let dict = res;
-      console.log(dict);
-      localStorage.setItem('id', ""+res.user?.id || "0");
-      localStorage.setItem('token', res.token || "");
-      localStorage.setItem('username', res.user?.username || "");
-      localStorage.setItem('email', res.user?.email || "");
-      localStorage.setItem('first_name', res.user?.first_name || "");
-      localStorage.setItem('last_name', res.user?.last_name || "");
-      localStorage.setItem('is_superuser', ""+res.user?.is_superuser || "");
-      localStorage.setItem('pageReload', 'true');
-      this.securityService.notificationAjouter("Vous êtes connecté maintenant!", "success");
+      if(res.user?.is_active == true){
+        localStorage.setItem('id', ""+res.user?.id || "0");
+        localStorage.setItem('token', res.token || "");
+        localStorage.setItem('username', res.user?.username || "");
+        localStorage.setItem('email', res.user?.email || "");
+        localStorage.setItem('first_name', res.user?.first_name || "");
+        localStorage.setItem('last_name', res.user?.last_name || "");
+        localStorage.setItem('is_superuser', ""+res.user?.is_superuser || "");
+        localStorage.setItem('role', ""+res.user?.role || "");
+        localStorage.setItem('pageReload', 'true');
+        this.securityService.notificationAjouter("Vous êtes connecté maintenant!", "success");
+      }else{
+        this.securityService.notificationAjouter(res?.test || "" , "warning");
+      }
       
       //this.location.replaceState('/');
       //window.location.reload();
