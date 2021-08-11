@@ -1,0 +1,108 @@
+
+
+
+<div id="container-p">
+    <div id="nav-p">
+        <nav>
+            <ul>
+                <li><a href="">Mes Produits</a></li>
+                <li><a href="">Mon Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="form-part-p">
+
+
+
+        
+<form enctype="multipart/form-data">
+
+    <!--     <div *ngIf="response && imageURL">
+            <img [src]='imageURL' />
+          </div> -->
+    
+        <input type="file" name="images" (change)="onChange($event)" multiple />
+    
+    
+    
+    
+    
+        <div class="form-group">
+          <label for="nom" class="text text-dark">Nom du Produit : </label>
+          <input type="text" class="form-control" id="nom" name="nom" aria-describedby="emailHelp" placeholder="Nom du Produit"
+          [formControl]="nom" />
+        </div>
+        <div *ngIf="!modeModify" [hidden]="!nom.valid || !nom.pristine" class="alert alert-danger">
+            Le nom est obligatoire
+        </div>
+        <div *ngIf="modeModify" [hidden]="nom.valid" class="alert alert-danger">
+            Le nom est obligatoire
+        </div>
+    
+    
+        <div class="form-group">
+            <label for="categories" class="text text-dark">Catégorie : </label>
+            <select name="categories" id="categories" [formControl]="categories"  class="form-control" >
+                <option *ngIf="modeModify && produit.categories?.length === 1" [ngValue]="categ"  class="form-control" selected>{{categ.nom}}</option>
+                
+                <option  *ngFor="let cat of categoriesListe" [ngValue]="cat"  class="form-control" >{{cat.nom}}</option>
+            </select>
+        </div>
+        <div *ngIf="!modeModify" [hidden]="!categories.valid || !categories.pristine" class="alert alert-danger">
+            Le choix de la catégorie est obligatoire
+        </div>
+        <div *ngIf="modeModify" [hidden]="categories.valid" class="alert alert-danger">
+            Le choix de la catégorie est obligatoire
+        </div>
+    
+        
+        <div class="form-group">
+          <label for="prix" class="text text-dark">Prix : </label>
+          <input type="number" class="form-control" min="0"  id="prix" name="prix" placeholder="Le prix du produit" 
+          [formControl]="prix"  />
+        </div>
+        <div [hidden]="prix.valid" class="alert alert-danger">
+            Le prix est obligatoire
+        </div>
+    
+        <div class="form-group">
+            <label for="diminu_price" class="text text-dark">Prix basé : </label>
+            <input type="number" class="form-control" min="0"  id="diminu_price" name="diminu_price" placeholder="Le prix basé du produit" 
+            [formControl]="diminu_price"  />
+        </div>
+    
+        <div class="form-group">
+            <label for="quantite" class="text text-dark">Quantité : </label>
+            <input type="number" class="form-control" min="1"  id="quantite" name="quantite" placeholder="La Quantité du prix" 
+            [formControl]="quantite"  />
+        </div>
+    
+    
+        <div class="form-group shadow-textarea">
+            <label for="caracteristique" class="text text-dark">Catéristique : </label>
+            <textarea  class="form-control z-depth-1" rows="3"  id="caracteristique" name="caracteristique" 
+            placeholder="Les caractéristiques du produit" [formControl]="caracteristique"  ></textarea>
+          </div>
+          <div *ngIf="!modeModify" [hidden]="!caracteristique.valid || !caracteristique.pristine" class="alert alert-danger">
+              Les caracteristiques sont obligatoires
+          </div>
+          <div *ngIf="modeModify" [hidden]="caracteristique.valid" class="alert alert-danger">
+            Les caracteristiques sont obligatoires
+          </div>
+    
+          
+        <button [disabled]="!nom.valid || !prix.valid || !categories.valid || !caracteristique.valid" type="submit" class="btn class-bg bg-success text-white" *ngIf="!modeModify" (click)="addProduit()" >Ajouter un produit</button>
+    
+        <button [disabled]="!nom.valid || !prix.valid || !categories.valid || !caracteristique.valid" type="submit" class="btn class-bg bg-success text-white" (click)="editProduit(idProduit)" *ngIf="modeModify" >Modifier ce produit</button>
+      </form>
+    
+    
+    
+
+
+
+
+    </div>
+</div>
+
+

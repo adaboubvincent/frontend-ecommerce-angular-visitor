@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VisiteurAccueilComponent } from './visiteur-accueil/visiteur-accueil.component';
+import { FournisseurAjoutProduitComponent } from './fournisseur-ajout-produit/fournisseur-ajout-produit.component';
 import { VisiteurDetailProduitComponent } from './visiteur-detail-produit/visiteur-detail-produit.component';
 import { LoginComponent } from './login/login.component';
 import { VisiteurEnregistreComponent } from './visiteur-enregistre/visiteur-enregistre.component';
@@ -17,7 +18,10 @@ const routes: Routes = [
   {path: '', component: VisiteurAccueilComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: VisiteurEnregistreComponent},
-  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  {path: 'profile', children: [ 
+    {path: '', component: ProfileComponent},
+    {path: 'ajouter-produit', component: FournisseurAjoutProduitComponent}
+  ], canActivate: [AuthGuard]},
 
   {path: '#', children: [
     {path: 'produit/#', children: [

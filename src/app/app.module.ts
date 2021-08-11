@@ -26,6 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 import { EmailService } from './services/email/email.service';
 import { PaiementService } from './services/paiement/paiement.service';
+import { CommandeFaiteComponent } from './commande-faite/commande-faite.component';
+import { FournisseurAjoutProduitComponent } from './fournisseur-ajout-produit/fournisseur-ajout-produit.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { PaiementService } from './services/paiement/paiement.service';
     CommanderComponent,
     ContactComponent,
     ProfileComponent,
-    EmailConfirmationComponent
+    EmailConfirmationComponent,
+    CommandeFaiteComponent,
+    FournisseurAjoutProduitComponent
   ],
   imports: [
     BrowserModule,
