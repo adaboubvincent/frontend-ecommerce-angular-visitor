@@ -21,7 +21,7 @@
         <div class="search-person">
           <div class="search__form">
               <form class="search-bar__form" (ngSubmit)="search()">
-                  <input class="search__input" id="search__input" type="search" name="q" value="" placeholder="Search entire store..." aria-label="Search" autocomplete="off">
+                  <input class="search__input" id="search__input" type="search" name="q" value="" placeholder="rechercher dans toute la boutique..." aria-label="Search" autocomplete="off">
               </form>
 
           </div>
@@ -48,7 +48,7 @@
 
                       <li *ngIf="username != ''"><a style="cursor: pointer;" routerLink="profile" >Profile</a></li>
                       <li *ngIf="username != ''"><a style="cursor: pointer;" (click)="logout()" id="logout" >Se déconnecter</a></li>
-                      <li *ngIf="is_superuser === 'true'"><a href="http://localhost:8001/" (click)="showPageAdmin()" >Aller sur la page Admin</a></li>
+                      <li *ngIf="is_superuser === 'true'"><a  href="http://localhost:8881/" (click)="showPageAdmin()" >Aller sur la page Admin</a></li>
 
                     </ul>
               </div>
@@ -385,7 +385,9 @@
               </div>
 
               <div class="me-5">
-              <button type="button" class="btn btn-primary btn-lg btn-block">Mettre mon produit en ligne</button>
+                <button type="button" class="btn btn-primary">
+                  Mettre mon produit en ligne <span class="badge badge-light"></span>
+                </button>
               </div>
 
               <div>

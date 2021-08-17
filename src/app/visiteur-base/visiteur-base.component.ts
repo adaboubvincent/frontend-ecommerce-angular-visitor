@@ -43,8 +43,8 @@ export class VisiteurBaseComponent implements OnInit {
 	categories: Categorie[] = [];
 
 
-  constructor(private produitService: ProductService, private route: Router, private imagesService: ImageService, 
-	private securityService: SecurityService, private panierService: PanierService, 
+  constructor(private produitService: ProductService, private route: Router, private imagesService: ImageService,
+	private securityService: SecurityService, private panierService: PanierService,
 	private produitacommanderService: ProduitacommanderService, private categorieService: CategoryService) { }
 
   ngOnInit(): void {
@@ -56,7 +56,7 @@ export class VisiteurBaseComponent implements OnInit {
 	this.categorieService.getAll("categories/").subscribe((res: Categorie[]) => {
 		this.categories = res;
 	});
-	
+
 	this.securityService.user(localStorage.getItem('token')).subscribe((res) => {
 		let r = res;
 	},
@@ -81,10 +81,10 @@ export class VisiteurBaseComponent implements OnInit {
 					this.produits[i].image = res;
 				  });
 			}
-		 
+
 		}
-	   
-  
+
+
 	});
 
 	this.panierService.panierProduitACommander.subscribe((res: PanierProduitACommander) => {
@@ -103,7 +103,7 @@ export class VisiteurBaseComponent implements OnInit {
 	this.panierService.getPrixTotalPanierSubject.subscribe((res: any) => {
 		this.prixTotalPanier = res.get_prix_total_panier;
 		this.prixTotalPanierFinal = res.get_prix_total_final_panier;
-		
+
 	},
 	(error) =>{
 		if(error.statusText == "Unauthorized"){
@@ -127,7 +127,7 @@ export class VisiteurBaseComponent implements OnInit {
 		//$('.search').show();
 		console.log($('.search').is('visible'));
 		$('.search-person').toggle(1000);
-		
+
 	})
 
   }
@@ -152,14 +152,19 @@ export class VisiteurBaseComponent implements OnInit {
 
 	this.loadingPage = true;
 	window.location.reload();
-	
-    
+
   }
 
+
   showPageAdmin(){
-	localStorage.setItem('admin', "true");
-	this.route.navigate(['admin/produit/liste'])
-	  
+    window.onbeforeunload = function() {
+      sessionStorage.setItem('admin', "true");
+    };
+    this.route.navigate(['admin/produit/liste'])
+
+  }
+  setVars(){
+
   }
 
   DiminuQuantiteProduit(id: number | undefined){
@@ -238,7 +243,7 @@ userShowUl(){
 			'transition': 'all 1s ease'
 		});
 	}
-	
+
 }
 
 cartMobile(){
