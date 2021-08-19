@@ -4,6 +4,8 @@ import { ClientService } from '../services/client/client.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { User } from '../models/User';
 import { Client } from '../models/Client';
+import { FournisseurUser } from '../models/FournisseurUser';
+import { FournisseurUserService } from '../services/fournisseur_user/fournisseur-user.service';
 
 @Component({
   selector: 'app-profile',
@@ -11,6 +13,8 @@ import { Client } from '../models/Client';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+
+  role: string = "";
   formGeneral = this.fb.group({
     username: ['', Validators.required],
     last_name: ['', Validators.required],
@@ -19,27 +23,45 @@ export class ProfileComponent implements OnInit {
   });
 
   client: Client = new Client();
+  fournisseurUser: FournisseurUser = new FournisseurUser();
+
+  formFournisseurUser = this.fb.group({
+    nom: ["", Validators.required],
+    telephone: [0, Validators.required],
+    adresse: ["", Validators.required],
+    estPerson: [false, Validators.required]
+  });
 
   formClient = this.fb.group({
     telephone: [0, Validators.required],
     adresse: ["", Validators.required]
   });
+
   nom: string | null = (localStorage.getItem('last_name')) ? localStorage.getItem('last_name') : "Iconnu";
   prenom: string | null = (localStorage.getItem('first_name')) ? localStorage.getItem('first_name') : "Iconnu";
   email: string | null = (localStorage.getItem('email')) ? localStorage.getItem('email') : "Iconnue";
   
   constructor(private fb: FormBuilder, private securityService: SecurityService,
-    private clientService: ClientService) { }
+    private clientService: ClientService, private fournisseurUserService: FournisseurUserService) { }
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role') || "";
+
     this.formGeneral.get('username')?.setValue(localStorage.getItem('username'));
     this.formGeneral.get('last_name')?.setValue(localStorage.getItem('last_name'));
     this.formGeneral.get('first_name')?.setValue(localStorage.getItem('first_name'));
     this.formGeneral.get('email')?.setValue(localStorage.getItem('email'));
 
-    this.clientService.getClient().subscribe((res: Client) => {
-      this.client = res;
-    });
+    if(this.role == "FOURNISSEUR"){
+      this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
+        this.fournisseurUser = res;
+      });
+    }else if(this.role == "CLIENT"){
+      this.clientService.getClient().subscribe((res: Client) => {
+        this.client = res;
+      });
+    }
+    
   }
 
   submitClient(){
@@ -50,6 +72,16 @@ export class ProfileComponent implements OnInit {
       window.location.reload();
     });
   }
+
+  submitFournisseurUser(){
+    this.fournisseurUserService.modifyT("fournisseur/compte/", this.fournisseurUser).subscribe((res: FournisseurUser) => {
+      this.fournisseurUser = res;
+      this.securityService.notificationAjouter("Vous venez de modifier votre information personnelle!", "success");
+
+      window.location.reload();
+    });
+  }
+
 
   submitGeneral(){
     let user = new User();

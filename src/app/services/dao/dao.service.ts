@@ -27,8 +27,8 @@ export class DaoService<T> {
     getAll(url: string): Observable<Array<T>>{
         return this.http.get<Array<T>>(this.url + url);
     }
-    addT(url: string, t: T | undefined){
-        return this.http.post(this.url + url, t);
+    addT(url: string, t: T | undefined):  Observable<T>{
+        return this.http.post<T>(this.url + url, t);
     }
     deletT(url: string, t?: T | undefined){
         const options = {

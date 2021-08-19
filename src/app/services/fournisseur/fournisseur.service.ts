@@ -12,4 +12,5 @@ export class FournisseurService extends DaoService<Fournisseur> {
   constructor(http: HttpClient) {
     super(http);
    }
+   
 }

@@ -53,7 +53,11 @@
                         </li>
                         <li class="text-center">
                             <h4 class="text-capitalize">{{nom}} {{prenom}}</h4>
-                            <p class="text-muted text-capitalize">Client</p>
+                            <p class="text-muted text-capitalize">
+                              <span *ngIf="role == 'CLIENT'">Client</span> 
+                                <span  *ngIf="role == 'FOURNISSEUR'" >Fournisseur</span> 
+                                <span  *ngIf="role == 'ADMIN'" >ADMIN</span> 
+                            </p>
                         </li>
                         <li>
                             <a class="btn btn-success text-center btn-block">E-commerce Compte</a>
@@ -61,8 +65,11 @@
                         <li><br></li>
                         <li>
                             <div class="btn-group-vertical btn-block">
+                              <a *ngIf="role == 'FOURNISSEUR'" href="profile/ajouter-produit" class="btn btn-default"><i class="fa fa-plus pull-right" aria-hidden="true"></i>Ajouter Produit</a>
+                              <a *ngIf="role == 'FOURNISSEUR'" href="%23/mon-panier" class="btn btn-default"><i class="fa fa-list pull-right" aria-hidden="true"></i>Mes Produits</a>
+                              <a *ngIf="role == 'ADMIN'" href="http://127.0.0.1:8881" class="btn btn-default"><i class="fa fa-tachometer pull-right" aria-hidden="true"></i>Espace ADMIN</a>
                               <a href="%23/mon-panier" class="btn btn-default"><i-bs name="cartFill" class="pull-right"></i-bs>Mon Panier</a>
-                                <a (click)="logout()" style="cursor: pointer;" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Se Déconnecter</a>
+                              <a (click)="logout()" style="cursor: pointer;" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Se Déconnecter</a>
                             </div>
                         </li>
                     </ul>
@@ -81,9 +88,17 @@
             <div class="panel-body no-padding rounded">
                 <ul class="list-group no-margin">
                     <li class="list-group-item"><i class="fa fa-envelope mr-5"></i> {{email}}</li>
-                    <li class="list-group-item"><i class="fa fa-map-marker mr-5"></i> {{client.adresse}}</li>
+                    <li class="list-group-item"><i class="fa fa-map-marker mr-5"></i> 
+                      <span *ngIf="role == 'CLIENT'">{{client.adresse}}</span>
+                      <span *ngIf="role == 'FOURNISSEUR'">{{fournisseurUser.adresse}}</span>
+                      <span *ngIf="role == 'ADMIN'">Introuvable</span>
+                    </li>
                     
-                    <li class="list-group-item"><i class="fa fa-phone mr-5"></i> +00228 {{client.telephone}}</li>
+                    <li class="list-group-item"><i class="fa fa-phone mr-5"></i> +00228 
+                      <span *ngIf="role == 'CLIENT'">{{client.telephone}}</span>
+                      <span *ngIf="role == 'FOURNISSEUR'">{{fournisseurUser.telephone}}</span>
+                      <span *ngIf="role == 'ADMIN'">00 00 00 00</span>
+                    </li>
                 </ul>
             </div><!-- /.panel-body -->
         </div><!-- /.panel -->
@@ -196,14 +211,24 @@
         <div class="col-md-6">
             <div class="panel panel-success rounded shadow">
                 <div class="panel-heading no-border">
-                    <h2>Infos Client</h2>
+                    <h2>Infos 
+                      <span *ngIf="role == 'CLIENT'">Client</span> 
+                      <span  *ngIf="role == 'FOURNISSEUR'" >Fournisseur</span> 
+                      <span  *ngIf="role == 'ADMIN'" >ADMIN</span> 
+                    </h2>
                     <div class="clearfix"></div>
                 </div><!-- /.panel-heading -->
 
                 <div class="panel-footer no-padding no-border">
                     
                     <div class="line no-margin"></div><!-- /.line -->
-                    <form class="pt-3" [formGroup]="formClient">
+                    <h4 *ngIf="role == 'FOURNISSEUR'">
+                        <span>Status : 
+                          <i *ngIf="fournisseurUser.activer == true" class="fa fa-check" style="color: green;" aria-hidden="true"></i>
+                          <i *ngIf="fournisseurUser.activer == false" class="fa fa-times" style="color: red;" aria-hidden="true"></i>
+                        </span>
+                      </h4>
+                    <form *ngIf="role == 'CLIENT'" class="pt-3" [formGroup]="formClient">
                         <div class="form-group">
                           <label>Numéro de Téléphone</label>
                           <div class="input-group">
@@ -231,6 +256,54 @@
                         </div>
                         
                       </form>
+
+                      <form *ngIf="role == 'FOURNISSEUR'" class="pt-3" [formGroup]="formFournisseurUser">
+                        <div class="form-group">
+                          <label>Nom de la Boutique (Ou votre nom complet)</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend bg-transparent">
+                              <span class="input-group-text bg-transparent border-right-0">
+                              </span>
+                            </div>
+                            <input [(ngModel)]="fournisseurUser.nom" formControlName="nom" type="text" class="form-control form-control-lg border-left-0" placeholder="Nom de la Boutique (Ou votre nom complet)">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label>Numéro de Téléphone</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend bg-transparent">
+                              <span class="input-group-text bg-transparent border-right-0">
+                              </span>
+                            </div>
+                            <input [(ngModel)]="fournisseurUser.telephone" formControlName="telephone" type="number" class="form-control form-control-lg border-left-0" placeholder="Numéro de Téléphone">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label>Adresse Complète</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend bg-transparent">
+                              <span class="input-group-text bg-transparent border-right-0">
+                              </span>
+                            </div>
+                            <input [(ngModel)]="fournisseurUser.adresse" formControlName="adresse" type="textarea" class="form-control form-control-lg border-left-0" placeholder="Adresse complète">
+                          </div>
+                        </div>
+                        
+                        <div class="form-check">
+                          <input [(ngModel)]="fournisseurUser.estPerson" formControlName="estPerson" class="form-check-input" type="checkbox" value="" id="flexCheckChecked" [checked]="fournisseurUser.estPerson">
+                          <label class="form-check-label" for="flexCheckChecked">
+                            &nbsp;&nbsp;&nbsp;&nbsp; Boutique
+                          </label>
+                        </div>
+                    
+                        
+                        <div class="mt-3">
+                          <button  (click)="submitFournisseurUser()" [disabled]="!formFournisseurUser.valid" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn bg-color-site text-white" >Modifier l'infos Fournisseur</button>
+                        </div>
+                        
+                      </form>
+
+
                 </div><!-- /.panel-footer -->
             </div><!-- /.panel -->
         </div>
