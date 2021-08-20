@@ -25,6 +25,17 @@ export class FournisseurUserService extends DaoService<FournisseurUser> {
     return this.http.get<FournisseurUser>(this.url+"fournisseur/compte/", options);
    }
 
+   getProduitFournisseurUser(): Observable<FournisseurUser>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': 'Token '+localStorage.getItem('token')
+      })
+    };
+
+    return this.http.get<FournisseurUser>(this.url+"produit-fournisseur/", options);
+   }
+
 
 
    

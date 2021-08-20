@@ -55,7 +55,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
     private routeOther: Router, private imageService: ImageService) { }
 
   ngOnInit(): void {
-    this.produitService.getAll("produits/").subscribe((prots: Produit[]) => {
+    this.fournisseurUserService.getProduitFournisseurUser().subscribe((prots: Produit[]) => {
       this.produits = prots;
       if(this.route.snapshot.params['id']){
         this.idProduit = this.route.snapshot.params['id'];
@@ -83,6 +83,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
   }
 
   addProduit(){
+    this.produit.fournisseur = this.fournisseurUser;
     this.affecterData();
     this.produitService.addT("ajout-produit/",this.produit).subscribe((res: Produit) => {
       this.produit = res;
@@ -106,6 +107,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
   }
 
   editProduit(id: number){
+    this.produit.fournisseur = this.fournisseurUser;
     this.affecterData();
     this.produitService.modifyT("produit/"+this.produits.find((item) => {
       return item.id === Number(id)
