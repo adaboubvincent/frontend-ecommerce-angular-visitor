@@ -29,6 +29,7 @@ import { PaiementService } from './services/paiement/paiement.service';
 import { CommandeFaiteComponent } from './commande-faite/commande-faite.component';
 import { FournisseurAjoutProduitComponent } from './fournisseur-ajout-produit/fournisseur-ajout-produit.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { FornisseurListProduitComponent } from './fornisseur-list-produit/fornisseur-list-produit.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     EmailConfirmationComponent,
     CommandeFaiteComponent,
     FournisseurAjoutProduitComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    FornisseurListProduitComponent
   ],
   imports: [
     BrowserModule,
