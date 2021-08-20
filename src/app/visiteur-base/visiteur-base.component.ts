@@ -156,6 +156,7 @@ export class VisiteurBaseComponent implements OnInit {
   }
 
 
+<<<<<<< HEAD
   showPageAdmin(){
     window.onbeforeunload = function() {
       sessionStorage.setItem('admin', "true");
@@ -166,6 +167,8 @@ export class VisiteurBaseComponent implements OnInit {
   setVars(){
 
   }
+=======
+>>>>>>> 285fa895a0317bc1d3e47759cbdedbd7eaeba39c
 
   DiminuQuantiteProduit(id: number | undefined){
 	  this.panierService.quantitePlusOuMoinsDuProduit(id, 0).subscribe((res: Text) => {

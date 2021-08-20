@@ -65,4 +65,17 @@ getToken(){
   return localStorage.getItem('token');
 }
 
+
+
+
+send_email_reset_password_view(email: string): Observable<any>{
+  return this.http.get<any>(this.url + "auth/send_email_reset_password_view/" + email + "/");
+}
+
+
+reset_password(passord1: string, password2: string, uidb64: string, token: string): Observable<any>{
+  return this.http.get<any>(this.url + "auth/reset_password/" + passord1 + "/" + password2 + "/" + uidb64 + "/" + token + "/");
+}
+
+
 }
