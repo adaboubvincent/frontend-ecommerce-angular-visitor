@@ -20,6 +20,7 @@ export class DetailPanierComponent implements OnInit {
 	isSearchMode: boolean = false;
 	url: string = this.produitService.BASE_URL;
 	image: Image = new Image();
+  checked: boolean = false;
 
 	username: string | null = "";
 	is_superuser: string | null = "";
@@ -29,27 +30,27 @@ export class DetailPanierComponent implements OnInit {
 
 	prixTotalPanier = 0;
 	prixTotalPanierFinal = 0;
-  constructor(private produitService: ProductService, private imagesService: ImageService, private panierService: PanierService, 
+  constructor(private produitService: ProductService, private imagesService: ImageService, private panierService: PanierService,
     private produitacommanderService: ProduitacommanderService, private route: Router) { }
 
   ngOnInit(): void {
     this.panierService.panierProduitACommander.subscribe((res: PanierProduitACommander) => {
       this.panier = res.panier;
       this.productsACommander = res.produit_a_commander || [];
-      for(let i = 0; i < this.productsACommander.length; i++){
+      for (let i = 0; i < this.productsACommander.length; i++) {
         this.imagesService.imageOfProduit(Number(this.productsACommander[i].produit?.id)).subscribe((res: Image) => {
           this.productsACommander[i].image = res;
         })
-        }
-  
-  
+      }
+
+
     });
     this.panierService.emitPanierProduitACommander();
-  
+
     this.panierService.getPrixTotalPanierSubject.subscribe((res: any) => {
       this.prixTotalPanier = res.get_prix_total_panier;
       this.prixTotalPanierFinal = res.get_prix_total_final_panier;
-      
+
     });
     this.panierService.emitGetPrixTotalPanier();
     $('.search-person').hide();
@@ -58,9 +59,11 @@ export class DetailPanierComponent implements OnInit {
       //$('.search').show();
       console.log($('.search').is('visible'));
       $('.search-person').toggle(1000);
-      
-    })
+
+    });
   }
+
+
 
 
   supprimerProduitACommanderDansPanier(id: number | undefined){
@@ -107,4 +110,16 @@ export class DetailPanierComponent implements OnInit {
   showCommandePage(){
     this.route.navigate(['#/commander'])
   }
+  check(){
+    if ( this.checked === false){
+      this.checked = true;
+    }else{
+      this.checked = false;
+    }
+  }
+
 }
+
+
+
+
