@@ -15,6 +15,9 @@ export class EmailService extends DaoService<any> {
 
    confirmation_email(uidb64: string, token: string): Observable<any>{
     return this.http.get<any>(this.url + "activate/" + uidb64 + "/" + token + "/");
-}
+  }
+
+  
+
 
 }

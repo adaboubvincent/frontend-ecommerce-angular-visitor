@@ -8,7 +8,7 @@
           </div>
           <div class="col-lg-8 align-items-center justify-content-center"  style="width: 100% !important; ">
             <div class="auth-form-transparent text-left p-8">
-
+              <br /><br /><br />
               <h4 style="text-align: center; font-weight: bold;">Bienvenu sur Mayaki!</h4>
               <h6 class="font-weight-light">Ravi de vous revoir encore!</h6>
               <form class="pt-3" [formGroup]="formLogin">
@@ -42,20 +42,45 @@
                     <label class="form-check-label text-muted">
                       <input type="checkbox" class="form-check-input" hidden>  </label>
                   </div>
-                  <a href="#" class="auth-link text-black">Mot de passse oublie ?</a>
+                  <a data-toggle="modal" href="#myModal" class="auth-link text-black">Mot de passse oublie ?</a>
                 </div>
                 <div class="my-3">
                   <button (click)="submit()" [disabled]="!formLogin.valid" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn bg-color-site text-white" >SE CONNECTER</button>
                 </div>
-                <div class="mb-2 d-flex">
+                <!-- <div class="mb-2 d-flex">
                   <button type="button" class="btn btn-facebook auth-form-btn flex-grow mr-1 bg-color-site">
                     <i-bs class="mr-2" name="facebook"></i-bs>Facebook </button>
                   <button type="button" class="btn btn-google auth-form-btn flex-grow ml-1 bg-color-site">
                     <i-bs class="mr-2" name="google"></i-bs>Google </button>
-                </div>
+                </div> -->
                 <!-- <div class="text-center mt-4 font-weight-light"> Don't have an account? <a nam="register" class="text-primary">Create</a>
                 </div>-->
               </form>
+
+              <form [formGroup]="formResetPassword">
+              <div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <h4 class="modal-title">Mot de passse oublie ?</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Entrez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.</p>
+                    <input formControlName="email" type="email" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
+                  </div>
+                  <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger" type="button">Retourner</button>
+                    <button (click)="submitEmail()" [disabled]="!formResetPassword.valid" 
+                    class="btn btn-primary bg-color-site text-white" type="submit">Envoyer</button>
+                  </div>
+                  </div>
+                </div>
+                </div>
+              </form>
+                
+
+
             </div>
           </div>
 

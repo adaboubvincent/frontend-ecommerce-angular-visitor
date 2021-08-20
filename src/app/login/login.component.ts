@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
     username: ['', Validators.required],
     password: ['', Validators.required]
   });
+  formResetPassword = this.fb.group({
+    email: ['',[ Validators.required, Validators.email]]
+  });
 
   constructor(private fb: FormBuilder, private securityService: SecurityService, private route: Router, private location: Location) {
    }
@@ -64,5 +67,16 @@ export class LoginComponent implements OnInit {
   }
 
 
-
+submitEmail(){
+    this.securityService.send_email_reset_password_view(this.formResetPassword.get('email')?.value).subscribe((res) => {
+      
+      this.securityService.notificationAjouter(res?.test || "" , "success");
+      
+      
+    }, (error) => {
+      this.securityService.notificationAjouter(error?.error?.test || "" , "warning");
+    });
+    
+    
+  }
 }

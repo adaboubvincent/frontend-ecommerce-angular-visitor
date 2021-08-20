@@ -12,6 +12,7 @@ import { AuthGuard } from './services/guard-auth/auth.guard';
 import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 //import { VisiteurAccueilComponent } from './visiteur-accueil/visiteur-accueil.component';
 
 const routes: Routes = [
@@ -32,7 +33,8 @@ const routes: Routes = [
     {path: 'commander', component: CommanderComponent, canActivate: [AuthGuard]},
     {path: 'contact', component: ContactComponent}
   ]},
-  {path: 'confirmation/email', component: EmailConfirmationComponent}
+  {path: 'confirmation/email', component: EmailConfirmationComponent},
+  {path: 'reinitialisation/mot_de_passe', component: ResetPasswordComponent}
 ];
 
 @NgModule({
