@@ -1,3 +1,4 @@
+<!--
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <p style="text-align: center !important; margin-bottom: 25px !important; text-decoration: underline !important;">Résultat de : {{question}}</p>
 
@@ -38,3 +39,45 @@
       </figure>
       <div style="margin-bottom: 15px !important;"></div>
 </div>
+-->
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+
+  <br> <p style="text-align: center !important; margin-bottom: 25px !important; text-decoration: underline ;">Résultat de : {{question}}<span style="color: lightseagreen; text-decoration: none !important;"> -- {{produitsListSearch.length}} articles trouvé(s)</span></p>
+  <hr>
+  <div *ngIf="produitsListSearch.length === 0">
+    <h3 align="center">Aucun Produit n'a pas été trouvé</h3>
+  </div>
+  <div class="row" *ngIf="produitsListSearch.length != 0">
+
+    <div class="col-md-4" *ngFor="let pro of produitsListSearch">
+      <figure class="card card-product">
+        <div class="img-wrap"><img src="{{BASE_URL}}{{pro.image?.image}}" alt="{{pro.nom}}" ></div>
+        <figcaption class="info-wrap">
+          <h4 class="title">{{pro.nom}}</h4>
+          <p class="desc">Catégorie : {{pro.categorie?.nom}}</p>
+          <div class="rating-wrap">
+            <div class="label-rating">Quatité disponible : {{pro.quantite}} en stock</div>
+            <div class="label-rating"></div>
+          </div> <!-- rating-wrap.// -->
+        </figcaption>
+        <div class="bottom-wrap">
+          <div class="price-wrap h5">
+            <span class="price-new">{{pro.prix}} CFA</span> <del  *ngIf="pro.diminu_price" class="price-old">{{pro.prix}} CFA</del>
+          </div> <!-- price-wrap.// -->
+        </div> <!-- bottom-wrap.// -->
+        <div class="bottom-wrap">
+          <button (click)="addProductToCart(pro.id)" class="btn btn-sm btn-primary float-right">Ajouter au panier</button>
+          <button (click)="addProductToCart(pro.id)" class="btn btn-sm btn-success float-left">détails</button>
+        </div>
+      </figure>
+    </div> <!-- col // -->
+  </div> <!-- row.// -->
+
+</div>
+<!--container.//-->

@@ -33,7 +33,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
   categoriesListe: Categorie[] = [];
   categorieEmpty: Categorie = new Categorie();
 
-  
+
   nom = this.fb.control('', Validators.required);
   prix = this.fb.control(0, Validators.required);
   diminu_price = this.fb.control(0, Validators.required);
@@ -67,7 +67,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
         this.quantite.setValue(this.produit.quantite);
         this.caracteristique.setValue(this.produit.caracteristique);
         this.categories.setValue(this.produit.categories);
-        
+
         if(this.produit.categories?.length === 1){
           this.categ = this.produit.categories[0]
         }
@@ -93,7 +93,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
         this.onSubmit(this.produit.id, this.images.value[i]);
        }
      }
-     
+
       this.produitService.notificationAjouter("Le produit est ajouté avec succès", "success");
       this.ngOnInit();
 
@@ -103,7 +103,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
     this.messageAlert("Le produit "+this.produit?.nom+" est bien ajouté");
     this.produit = new Produit();
     this.resetData();
-    
+
   }
 
   editProduit(id: number){
@@ -126,7 +126,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
       this.produitService.notificationAjouter(error?.error?.text, "warning")
     });
 
-    
+
 
     this.produit = new Produit();
 
@@ -143,7 +143,7 @@ export class FournisseurAjoutProduitComponent implements OnInit {
     this.produit.quantite = this.quantite.value;
     this.produit.caracteristique = this.caracteristique.value;
     this.produit.categories = [this.categories.value];
-    
+
     this.produit.fournisseur = this.fournisseurUser;
   }
 
@@ -179,9 +179,9 @@ onChange(event: any) {
       file.push(event.target.files[i]);
     }
     this.images.setValue(file);
-    
+
   }
-  
+
 }
 
 onSubmit(id: number | undefined, file: File) {
@@ -198,7 +198,7 @@ onSubmit(id: number | undefined, file: File) {
       console.log(res);
       console.log(this.imageURL);
     },
-    (err) => {  
+    (err) => {
       console.log(err);
     }
   );
