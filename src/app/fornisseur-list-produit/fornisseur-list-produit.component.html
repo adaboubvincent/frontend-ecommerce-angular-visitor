@@ -1,1 +1,57 @@
-<p>fornisseur-list-produit works!</p>
+<div id="container-p">
+
+    <div id="nav-p">
+        <nav>
+            <ul>
+                <li><a href="profile/ajouter-produit">Ajouter Produit</a></li>
+                <li><a href="profile">Mon Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="form-part-p">
+
+    <div class="display-elements">
+        <div id="ajout-text">
+            <h2 *ngIf="produits.length !== 0" style="color: #0f6674">Mes produits</h2>
+            <h2 *ngIf="produits.length === 0" style="color: #0f6674">Aucun produit trouvé</h2>
+        </div>
+    </div>
+
+  <div class="container card shadow rounded">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 " *ngFor="let pr of produits; let i=index" STYLE="margin-bottom: 12px;">
+        <div class="product-grid3">
+          <div class="product-image3">
+            <a href="#">
+              <img class="pic-1" src="{{URL_BASE}}{{pr.image?.image}}" title="{{pr.nom}} " alt="{{pr.nom}}" style="height: 100px; width: 120px;">
+            </a>
+            <ul class="social">
+              <li ><a  (click)="showPageDetailProduit(pr?.id)" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+              <li ><a (click)="showPageEdit(pr?.id)" data-tip="Modifier"><i class="fa fa-edit"></i></a></li>
+              <li ><a (click)="deleteProduit(pr?.id)" data-tip="supprimer"><i class="fa fa-trash"></i></a></li>
+
+            </ul>
+
+          </div>
+          <div class="product-content">
+            <h3 class="title"><a href="#">{{pr.nom}}</a></h3>
+            <div class="price">
+              {{pr.diminu_price}} CFA
+              <span>{{pr.prix}} CFA</span>
+            </div>
+            <ul class="rating">
+              <li class="fa fa-star"></li>
+              <li class="fa fa-star"></li>
+              <li class="fa fa-star"></li>
+              <li class="fa fa-star "></li>
+              <li class="fa fa-star disable"></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <hr>
+
+</div>

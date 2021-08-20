@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VisiteurAccueilComponent } from './visiteur-accueil/visiteur-accueil.component';
 import { FournisseurAjoutProduitComponent } from './fournisseur-ajout-produit/fournisseur-ajout-produit.component';
+import { FornisseurListProduitComponent } from './fornisseur-list-produit/fornisseur-list-produit.component';
 import { VisiteurDetailProduitComponent } from './visiteur-detail-produit/visiteur-detail-produit.component';
 import { LoginComponent } from './login/login.component';
 import { VisiteurEnregistreComponent } from './visiteur-enregistre/visiteur-enregistre.component';
@@ -21,7 +22,9 @@ const routes: Routes = [
   {path: 'register', component: VisiteurEnregistreComponent},
   {path: 'profile', children: [ 
     {path: '', component: ProfileComponent},
-    {path: 'ajouter-produit', component: FournisseurAjoutProduitComponent}
+    {path: 'ajouter-produit', component: FournisseurAjoutProduitComponent},
+    {path: 'produit/modifier/:id', component: FournisseurAjoutProduitComponent},
+    {path: 'list-produit', component: FornisseurListProduitComponent}
   ], canActivate: [AuthGuard]},
 
   {path: '#', children: [

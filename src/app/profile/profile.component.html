@@ -66,7 +66,7 @@
                         <li>
                             <div class="btn-group-vertical btn-block">
                               <a *ngIf="role == 'FOURNISSEUR'" href="profile/ajouter-produit" class="btn btn-default"><i class="fa fa-plus pull-right" aria-hidden="true"></i>Ajouter Produit</a>
-                              <a *ngIf="role == 'FOURNISSEUR'" href="%23/mon-panier" class="btn btn-default"><i class="fa fa-list pull-right" aria-hidden="true"></i>Mes Produits</a>
+                              <a *ngIf="role == 'FOURNISSEUR'" href="profile/list-produit" class="btn btn-default"><i class="fa fa-list pull-right" aria-hidden="true"></i>Mes Produits</a>
                               <a *ngIf="role == 'ADMIN'" href="http://127.0.0.1:8881" class="btn btn-default"><i class="fa fa-tachometer pull-right" aria-hidden="true"></i>Espace ADMIN</a>
                               <a href="%23/mon-panier" class="btn btn-default"><i-bs name="cartFill" class="pull-right"></i-bs>Mon Panier</a>
                               <a (click)="logout()" style="cursor: pointer;" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Se Déconnecter</a>
