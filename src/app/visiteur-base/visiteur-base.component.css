@@ -51,3 +51,14 @@
     }
 
 }
+
+
+#section-footer a, #section-footer p,  #section-footer h6 {
+    color: white !important;
+}
+/* #section-footer {
+    filter: grayscale(100%);
+} */
+.size-i {
+    font-size: 25px;
+}

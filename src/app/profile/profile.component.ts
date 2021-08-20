@@ -14,12 +14,13 @@ import { FournisseurUserService } from '../services/fournisseur_user/fournisseur
 })
 export class ProfileComponent implements OnInit {
 
-  role: string = "";
+  
   formGeneral = this.fb.group({
     username: ['', Validators.required],
     last_name: ['', Validators.required],
     first_name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]]
+    email: ['', [Validators.required, Validators.email]],
+    role: ['', Validators.required]
   });
 
   client: Client = new Client();
@@ -40,6 +41,7 @@ export class ProfileComponent implements OnInit {
   nom: string | null = (localStorage.getItem('last_name')) ? localStorage.getItem('last_name') : "Iconnu";
   prenom: string | null = (localStorage.getItem('first_name')) ? localStorage.getItem('first_name') : "Iconnu";
   email: string | null = (localStorage.getItem('email')) ? localStorage.getItem('email') : "Iconnue";
+  role: string | null = (localStorage.getItem('role')) ? localStorage.getItem('role') : "Iconnue";
   
   constructor(private fb: FormBuilder, private securityService: SecurityService,
     private clientService: ClientService, private fournisseurUserService: FournisseurUserService) { }
@@ -51,6 +53,7 @@ export class ProfileComponent implements OnInit {
     this.formGeneral.get('last_name')?.setValue(localStorage.getItem('last_name'));
     this.formGeneral.get('first_name')?.setValue(localStorage.getItem('first_name'));
     this.formGeneral.get('email')?.setValue(localStorage.getItem('email'));
+    this.formGeneral.get('role')?.setValue(localStorage.getItem('role'));
 
     if(this.role == "FOURNISSEUR"){
       this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
@@ -89,6 +92,7 @@ export class ProfileComponent implements OnInit {
     user.email = this.formGeneral.get('email')?.value;
     user.first_name = this.formGeneral.get('first_name')?.value;
     user.last_name = this.formGeneral.get('last_name')?.value;
+    user.role = this.formGeneral.get('role')?.value;
     this.securityService.modifyT("utilisateur/"+Number(localStorage.getItem('id'))+"/", user).subscribe((res: User) => {
       let dict = res;
       console.log(dict);
@@ -96,6 +100,7 @@ export class ProfileComponent implements OnInit {
       localStorage.setItem('email', res?.email || "");
       localStorage.setItem('first_name', res?.first_name || "");
       localStorage.setItem('last_name', res?.last_name || "");
+      localStorage.setItem('role', res?.role || "");
 
       this.securityService.notificationAjouter("Vous venez de modifier votre information personnelle!", "success");
 

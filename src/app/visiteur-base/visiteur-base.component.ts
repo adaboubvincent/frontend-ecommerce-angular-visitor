@@ -156,11 +156,7 @@ export class VisiteurBaseComponent implements OnInit {
     
   }
 
-  showPageAdmin(){
-	localStorage.setItem('admin', "true");
-	this.route.navigate(['admin/produit/liste'])
-	  
-  }
+
 
   DiminuQuantiteProduit(id: number | undefined){
 	  this.panierService.quantitePlusOuMoinsDuProduit(id, 0).subscribe((res: Text) => {
