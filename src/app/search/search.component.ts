@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Categorie } from '../models/Categorie';
 import { Image } from '../models/Image';
 import { Produit } from '../models/Produit';
@@ -25,14 +25,14 @@ export class SearchComponent implements OnInit {
   produitsListSearch: ProduitImage[] = [];
 
   constructor(private panierService: PanierService,private route: ActivatedRoute, private produitService: ProductService
-    , private imagesService: ImageService, private categorieService: CategoryService) {
-      
+    , private imagesService: ImageService, private categorieService: CategoryService, private rt: Router) {
+
      }
 
   ngOnInit(): void {
     this.search();
 
-    
+
   }
   search(){
     if(this.route.snapshot.params['q']){
@@ -49,7 +49,7 @@ export class SearchComponent implements OnInit {
                 this.produitsListSearch[i].categorie = 	this.produitsListSearch[i].categories?.find((item, index) => index === 0) ||  new Categorie();
                 });
             }
-           
+
           }
         });
       }else{
@@ -62,15 +62,15 @@ export class SearchComponent implements OnInit {
                 this.produitsListSearch[i].categorie = 	this.produitsListSearch[i].categories?.find((item, index) => index === 0) ||  new Categorie();
                 });
             }
-            
+
           }
         });
       }
-      
 
-      
+
+
       /* this.listeQuestion = this.question.split(' ');
-      
+
       this.produitService.getAll("produits/").subscribe((pds: Produit[]) => {
         this.produits = pds;
 
@@ -78,9 +78,9 @@ export class SearchComponent implements OnInit {
             if(item.nom?.toLocaleLowerCase().search(this.question.toLocaleLowerCase())  !== -1 ){
               this.produitsListSearch.push(item);
             }
-          
+
         } );
-        
+
         for(let i = 0; i < this.produits.length; i++){
           for(let ii = 0 ; ii < this.listeQuestion.length; ii++){
             if(this.produits[i].nom?.toLocaleLowerCase().search(this.listeQuestion[ii].toLocaleLowerCase()) !== -1){
@@ -94,7 +94,7 @@ export class SearchComponent implements OnInit {
         })
 
 
-      
+
 
         for(let i = 0; i < this.produitsListSearch.length; i++){
           this.imagesService.imageOfProduit(Number(this.produitsListSearch[i].id)).subscribe((res: Image) => {
@@ -107,8 +107,11 @@ export class SearchComponent implements OnInit {
     }
 
   }
+  showPageDetailProduit(id: number | undefined = 0){
+    this.rt.navigate(['#/produit/#/detail', id]);
+  }
 
-  
+
   addProductToCart(id: number | undefined){
     this.panierService.ajouterAuPanier(localStorage.getItem('token'), id, 1).subscribe((res: Text) => {
       if(res.text === "produit ajoute avec succes!"){
@@ -116,9 +119,9 @@ export class SearchComponent implements OnInit {
       }else{
         this.produitService.notificationAjouter(res.text || "", "warning");
       }
-      
+
       this.panierService.emitPanierProduitACommander();
-      
+
     },
     (error) => this.produitService.notificationAjouter("Veuillez vous connecter!" || "", "warning"));
   }
