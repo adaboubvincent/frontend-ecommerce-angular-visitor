@@ -14,10 +14,12 @@ import { ContactComponent } from './contact/contact.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { CommandeFaiteComponent } from './commande-faite/commande-faite.component';
 //import { VisiteurAccueilComponent } from './visiteur-accueil/visiteur-accueil.component';
 
 const routes: Routes = [
   {path: '', component: VisiteurAccueilComponent},
+  {path: 'commander-effectuee', component: CommandeFaiteComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: VisiteurEnregistreComponent},
   {path: 'profile', children: [ 

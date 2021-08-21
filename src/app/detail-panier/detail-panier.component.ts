@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Image } from '../models/Image';
+import { InfosPaiement } from '../models/infosPaiement';
 import { Panier } from '../models/Panier';
 import { PanierProduitACommander } from '../models/PanierProduitACommander';
 import { ProduitACommander } from '../models/ProduitACommander';
 import { Text } from '../models/Text';
 import { ImageService } from '../services/image/image.service';
+import { PaiementService } from '../services/paiement/paiement.service';
 import { PanierService } from '../services/panier/panier.service';
 import { ProductService } from '../services/product/product.service';
 import { ProduitacommanderService } from '../services/produitacommander/produitacommander.service';
+import { CommanderService } from '../services/commander/commander.service';
+import { Client } from '../models/Client';
+import { ClientService } from '../services/client/client.service';
+import { FournisseurUserService } from '../services/fournisseur_user/fournisseur-user.service';
+import { FournisseurUser } from '../models/FournisseurUser';
 
 @Component({
   selector: 'app-detail-panier',
@@ -30,8 +37,14 @@ export class DetailPanierComponent implements OnInit {
 
 	prixTotalPanier = 0;
 	prixTotalPanierFinal = 0;
+
+  infosPaiement?: InfosPaiement;
+  client: Client | FournisseurUser = new Object();
+  remplireInfos: boolean = false;
   constructor(private produitService: ProductService, private imagesService: ImageService, private panierService: PanierService,
-    private produitacommanderService: ProduitacommanderService, private route: Router) { }
+    private produitacommanderService: ProduitacommanderService, private paiementService: PaiementService, 
+    private commanderService: CommanderService, private route: Router,
+    private clientService: ClientService, private fournisseurUserService: FournisseurUserService) { }
 
   ngOnInit(): void {
     this.panierService.panierProduitACommander.subscribe((res: PanierProduitACommander) => {
@@ -61,6 +74,15 @@ export class DetailPanierComponent implements OnInit {
       $('.search-person').toggle(1000);
 
     });
+
+    this.clientService.getClient().subscribe((res: Client) => {
+      this.client = res;
+    });
+
+    this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
+      this.client = res;
+    });
+
   }
 
 
@@ -107,9 +129,52 @@ export class DetailPanierComponent implements OnInit {
     this.route.navigate(['#/produit/#/detail', id])
   }
 
-  showCommandePage(){
+  /* showCommandePage(){
     this.route.navigate(['#/commander'])
+  } */
+
+  showCommandePage(){
+    /* 
+      """
+        Nom	                Description
+        tx_reference	    Identifiant Unique générée par PayGateGlobal pour la transaction
+        identifier	        Identifiant interne de la transaction de l’e-commerce. ex: Numero de commande Cet identifiant doit etre unique.
+        payment_reference	Code de référence de paiement généré par Flooz. Ce code peut être utilisé en cas de résolution de problèmes ou de plaintes.
+        amount	            Montant payé par le client
+        datetime	        Date and Heure de paiement
+        payment_method	    Méthode de paiement utilisée par le client. Valeurs possibles: FLOOZ, T-Money
+        phone_number	    Numéro de téléphone du client qui a effectué le paiement.
+        """
+
+        """
+        Les valeurs possible de la transaction sont:
+        0 : Transaction enregistrée avec succès
+        2 : Jeton d’authentification invalide
+        4 : Paramètres Invalides
+        6 : Doublons détectées. Une transaction avec le même identifiant existe déja.
+      """
+    */
+
+      if(String(this.client.telephone) != String(0) && this.client.adresse != ""){
+        this.remplireInfos = false;
+        var d = new Date();
+        var date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+        var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
+//prixTotalPanierFinal
+        this.infosPaiement = new InfosPaiement(String(this.client.telephone), String(this.prixTotalPanierFinal), date+hours, "http://127.0.0.1:8882/commander-effectuee");
+      
+        window.location.href = "https://paygateglobal.com/v1/page?token="+"c038a374-b987-475a-abf9-5895f3a56b1b&amount="+this.infosPaiement?.montant+"&description="+this.infosPaiement?.description+"&identifier="+this.infosPaiement?.identifierCommande+"&url="+this.infosPaiement?.urlRedirectApresPaiement+"&phone="+this.infosPaiement?.phoneClient;
+
+      }else{
+        this.remplireInfos = true;
+        this.commanderService.notificationAjouter("Veuilez remplir vos informations nécessaire pour la livraison", "warning");
+      }
+      
+    
   }
+
+
+
   check(){
     if ( this.checked === false){
       this.checked = true;

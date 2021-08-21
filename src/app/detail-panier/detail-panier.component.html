@@ -194,6 +194,9 @@
                             <input type="checkbox" name="tearm" id="cartTearm"  (click)="check()" class="checkbox" value="tearm" required="">
                             Je suis d'accord avec les termes et conditions</label>
                         </p>
+                        <p *ngIf="remplireInfos" style="color: red;">
+                          Vos informations personnelles ne sont pas encore remplir(Infos client). <a target="__blank" href="profile" style="color: blue;">Remplir les en même temps.</a>
+                        </p>
                         <button type="submit" name="checkout" id="cartCheckout" [disabled]="!checked" (click)="showCommandePage()" [disabled]="" class="btn btn-success checkout" >commander</button>
                         <div class="paymnet-img"><img src="assets/images/payment-img.jpg" alt="Payment"></div>
                       </div>
