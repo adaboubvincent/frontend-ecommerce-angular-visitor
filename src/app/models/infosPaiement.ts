@@ -1,19 +1,20 @@
 
 export class InfosPaiement {
 
-    phoneClient: string;
-    montant: string;
-    identifierCommande: string;
-    urlRedirectApresPaiement: string;
+    phone_number: string;
+    amount: string;
+    identifier: string;
+    auth_token: string;
     description?: string;
-    token?: string;
     network?: string;
 
-    constructor(phoneClient: string, montant: string, identifierCommande: string, urlRedirectApresPaiement: string, description?: string){
-        this.phoneClient = phoneClient;
-        this.montant = montant;
-        this.identifierCommande = identifierCommande;
-        this.urlRedirectApresPaiement = urlRedirectApresPaiement;
+    constructor(auth_token: string, amount: string, phone_number:string, identifier: string, network:string,
+            description?: string){
+        this.phone_number = phone_number;
+        this.amount = amount;
+        this.identifier = identifier;
+        this.auth_token = auth_token;
         this.description = description;
+        this.network = network;
     }
 }

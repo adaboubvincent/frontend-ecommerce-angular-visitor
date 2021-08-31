@@ -197,7 +197,50 @@
                         <p *ngIf="remplireInfos" style="color: red;">
                           Vos informations personnelles ne sont pas encore remplir(Infos client). <a target="__blank" href="profile" style="color: blue;">Remplir les en même temps.</a>
                         </p>
-                        <button type="submit" name="checkout" id="cartCheckout" [disabled]="!checked" (click)="showCommandePage()" [disabled]="" class="btn btn-success checkout" >commander</button>
+                        <button *ngIf="!isPossibleToCommande" type="submit" name="checkout" id="cartCheckout" [disabled]="!checked" 
+                          (click)="showCommandePage()" class="btn btn-success checkout" >commander</button>
+                        
+                        <!-- Button trigger modal -->
+<button *ngIf="isPossibleToCommande" type="submit" name="checkout" id="cartCheckout" [disabled]="!checked" 
+  type="button" class="btn btn-success checkout" data-toggle="modal" data-target="#exampleModal">
+  commander
+</button>
+
+<!-- Modal -->
+<form [formGroup]="formNumero">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Votre numéro pour la transaction</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <input formControlName="numero" type="text" name="numero" placeholder="XXXXXXXX" autocomplete="off" 
+          class="form-control placeholder-no-fix">
+        <br />
+          <input type="text" name="numero" placeholder="..." autocomplete="off" 
+          class="form-control placeholder-no-fix" [value]="getReseau()" readonly>
+          
+  
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" *ngIf="!isTrainingCommande" 
+          (click)="showCommandePage()" [disabled]="getReseau() === '...'" >Commander</button>
+        <button type="submit" class="btn btn-primary" *ngIf="isTrainingCommande" disabled >Demande en cours...</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+
+
+
                         <div class="paymnet-img"><img src="assets/images/payment-img.jpg" alt="Payment"></div>
                       </div>
 

@@ -64,7 +64,8 @@ export class DaoService<T> {
           type: type
         }); */
 
-        $.notify(message, type);
+        $.notify(message, type); //, { delay: 10000, timer: 10000 }
+        //notify.update({ delay: 1000 });
 
         //this.notifier.notify(type, message);
     }

@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
     email: ['',[ Validators.required, Validators.email]]
   });
 
+  isSending = false;
+
   constructor(private fb: FormBuilder, private securityService: SecurityService, private route: Router, private location: Location) {
    }
 
@@ -68,13 +70,16 @@ export class LoginComponent implements OnInit {
 
 
 submitEmail(){
+    this.isSending = true;
     this.securityService.send_email_reset_password_view(this.formResetPassword.get('email')?.value).subscribe((res) => {
       
       this.securityService.notificationAjouter(res?.test || "" , "success");
-      
+      this.formResetPassword.get('email')?.setValue("");
+      this.isSending = false;
       
     }, (error) => {
       this.securityService.notificationAjouter(error?.error?.test || "" , "warning");
+      this.isSending = false;
     });
     
     
