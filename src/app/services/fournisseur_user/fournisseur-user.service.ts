@@ -37,7 +37,6 @@ export class FournisseurUserService extends DaoService<FournisseurUser> {
     return this.http.get<Array<Produit>>(this.url+"produit-fournisseur/", options);
    }
 
-
-
+   
    
 }

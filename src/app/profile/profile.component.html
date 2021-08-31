@@ -87,14 +87,15 @@
             </div><!-- /.panel-heading -->
             <div class="panel-body no-padding rounded">
                 <ul class="list-group no-margin">
-                    <li class="list-group-item"><i class="fa fa-envelope mr-5"></i> {{email}}</li>
+                    <li class="list-group-item"><i class="fa fa-envelope"></i> 
+                      <span style="display: inline-block; font-size: 10px; margin-left: 2px;">{{email}}</span></li>
                     <li class="list-group-item"><i class="fa fa-map-marker mr-5"></i> 
                       <span *ngIf="role == 'CLIENT'">{{client.adresse}}</span>
                       <span *ngIf="role == 'FOURNISSEUR'">{{fournisseurUser.adresse}}</span>
                       <span *ngIf="role == 'ADMIN'">Introuvable</span>
                     </li>
                     
-                    <li class="list-group-item"><i class="fa fa-phone mr-5"></i> +00228 
+                    <li class="list-group-item"><i class="fa fa-phone"></i> +00228 
                       <span *ngIf="role == 'CLIENT'">{{client.telephone}}</span>
                       <span *ngIf="role == 'FOURNISSEUR'">{{fournisseurUser.telephone}}</span>
                       <span *ngIf="role == 'ADMIN'">00 00 00 00</span>

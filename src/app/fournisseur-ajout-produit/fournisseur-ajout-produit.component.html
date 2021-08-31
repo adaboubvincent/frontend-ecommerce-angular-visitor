@@ -6,6 +6,7 @@
         <nav>
             <ul>
                 <li><a href="profile/list-produit">Mes Produits</a></li>
+                <li><a href="profile/list-produits-commandes">Les Commandes</a></li>
                 <li><a href="profile">Mon Profile</a></li>
             </ul>
         </nav>
@@ -43,7 +44,7 @@
         <div class="form-group">
             <label for="categories" class="text text-dark">Catégorie : </label>
             <select name="categories" id="categories" [formControl]="categories"  class="form-control" >
-                <option *ngIf="modeModify && produit.categories?.length === 1" [ngValue]="categ"  class="form-control" selected="true">{{categ.nom}}</option>
+                <option *ngIf="modeModify && produit.categories?.length === 1" [ngValue]="categ"  class="form-control" [selected]="true">{{categ.nom}}</option>
                 
                 <option  *ngFor="let cat of categoriesListe" [ngValue]="cat"  class="form-control" >{{cat.nom}}</option>
             </select>

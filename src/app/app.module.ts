@@ -30,6 +30,7 @@ import { CommandeFaiteComponent } from './commande-faite/commande-faite.componen
 import { FournisseurAjoutProduitComponent } from './fournisseur-ajout-produit/fournisseur-ajout-produit.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { FornisseurListProduitComponent } from './fornisseur-list-produit/fornisseur-list-produit.component';
+import { FournisseurListProduitCommandesComponent } from './fournisseur-list-produit-commandes/fournisseur-list-produit-commandes.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { FornisseurListProduitComponent } from './fornisseur-list-produit/fornis
     CommandeFaiteComponent,
     FournisseurAjoutProduitComponent,
     ResetPasswordComponent,
-    FornisseurListProduitComponent
+    FornisseurListProduitComponent,
+    FournisseurListProduitCommandesComponent
   ],
   imports: [
     BrowserModule,

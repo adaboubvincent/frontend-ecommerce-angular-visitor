@@ -56,6 +56,8 @@ export class DetailPanierComponent implements OnInit {
     numero: ['', Validators.required]
   });
 
+  role: string | null = (localStorage.getItem('role')) ? localStorage.getItem('role') : "Iconnue";
+
   constructor(private produitService: ProductService, private imagesService: ImageService, private panierService: PanierService,
     private produitacommanderService: ProduitacommanderService, private paiementService: PaiementService, 
     private commanderService: CommanderService, private route: Router, private fb: FormBuilder,
@@ -90,13 +92,16 @@ export class DetailPanierComponent implements OnInit {
 
     });
 
-    this.clientService.getClient().subscribe((res: Client) => {
+    if(this.role == "FOURNISSEUR"){
+      this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
       this.client = res;
     });
-
-    this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
-      this.client = res;
-    });
+    }else if(this.role == "CLIENT"){
+      this.clientService.getClient().subscribe((res: Client) => {
+        this.client = res;
+      });
+    }
+    
     this.formNumero.get('numero')?.setValue((this.client.telephone) ? String(this.client.telephone) : "");
 
     if(String(this.client.telephone) != String(0) && this.client.adresse != ""){
