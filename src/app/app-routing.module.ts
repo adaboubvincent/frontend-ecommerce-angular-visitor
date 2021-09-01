@@ -15,6 +15,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { CommandeFaiteComponent } from './commande-faite/commande-faite.component';
+import { FournisseurListProduitCommandesComponent } from './fournisseur-list-produit-commandes/fournisseur-list-produit-commandes.component';
 //import { VisiteurAccueilComponent } from './visiteur-accueil/visiteur-accueil.component';
 
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
     {path: '', component: ProfileComponent},
     {path: 'ajouter-produit', component: FournisseurAjoutProduitComponent},
     {path: 'produit/modifier/:id', component: FournisseurAjoutProduitComponent},
-    {path: 'list-produit', component: FornisseurListProduitComponent}
+    {path: 'list-produit', component: FornisseurListProduitComponent},
+    {path: 'list-produits-commandes', component: FournisseurListProduitCommandesComponent}
   ], canActivate: [AuthGuard]},
 
   {path: '#', children: [

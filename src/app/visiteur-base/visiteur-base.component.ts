@@ -16,6 +16,7 @@ import { SecurityService } from '../services/user/security.service';
 import { ProduitacommanderService } from '../services/produitacommander/produitacommander.service';
 import { CategoryService } from '../services/category/category.service';
 import { Categorie } from '../models/Categorie';
+import { CommanderService } from '../services/commander/commander.service';
 
 $('.search-person').hide();
 
@@ -42,10 +43,10 @@ export class VisiteurBaseComponent implements OnInit {
 	prixTotalPanierFinal = 0;
 	categories: Categorie[] = [];
 
-
   constructor(private produitService: ProductService, private route: Router, private imagesService: ImageService,
 	private securityService: SecurityService, private panierService: PanierService,
-	private produitacommanderService: ProduitacommanderService, private categorieService: CategoryService) { }
+	private produitacommanderService: ProduitacommanderService, private categorieService: CategoryService,
+	private commanderService: CommanderService) { }
 
   ngOnInit(): void {
 	if(this.loadingPage === true ){
@@ -128,7 +129,9 @@ export class VisiteurBaseComponent implements OnInit {
 		console.log($('.search').is('visible'));
 		$('.search-person').toggle(1000);
 
-	})
+	});
+
+	this.commander();
 
   }
 
@@ -211,6 +214,64 @@ searchByCategory(categorie: string | undefined){
 		return false;
 	  };
 }
+
+
+
+
+commander(){
+    if(localStorage.getItem("identifier") != ""){
+      console.log(localStorage.getItem("identifier"));
+
+      var commanderService = this.commanderService;
+      var route = this.route;
+      $.ajax({
+        type: "POST",
+        url: "https://paygateglobal.com/api/v2/status/?auth_token=c038a374-b987-475a-abf9-5895f3a56b1b&identifier="+String(localStorage.getItem("identifier")),
+        data: JSON.stringify({
+          auth_token: "c038a374-b987-475a-abf9-5895f3a56b1b",
+          identifier: String(localStorage.getItem("identifier")),
+        }),
+        success: function (result) {
+          console.log(result);
+          if(result?.status == 0){ //result?.status
+            commanderService.commander(localStorage.getItem('token')).subscribe((res: any) => {
+              localStorage.setItem("identifier", "");
+              localStorage.setItem('pageReload', 'true');
+              commanderService.notificationAjouter(res?.text+"\nDate de livraison : "+res?.date_livraison, "success");
+              route.navigateByUrl('');
+            }, (error:any) => {
+              console.log(error.statusText);
+              commanderService.notificationAjouter("Impossible de faire cette commande", "danger");
+            });
+          }else if(result?.status == 2){//Veuillez valider votre transaction en cours!
+            commanderService.notificationAjouter("Une de vos transactions est en cours.\nVeuillez valider votre transaction en cours!", "warning");
+			commanderService.notificationAjouter("Si vous ne recevrez pas de message de confirmation de votre code sur votre Portable, Probablement vous n'avez pas suffisamment d'argent pour la transaction.", "warning");
+            //route.navigateByUrl('');
+          }else if(result?.status == 4){
+            commanderService.notificationAjouter("Une de vos transactions est expirée", "warning");
+            //route.navigateByUrl('');
+          }else if(result?.status == 6){
+            commanderService.notificationAjouter("Une de vos transactions est annulée", "warning");
+            //route.navigateByUrl('');
+          }else{
+            commanderService.notificationAjouter("Une de vos transactions est suspendue", "warning");
+            //route.navigateByUrl('');
+          }
+          
+        },
+        error: function (result, status) {
+          commanderService.notificationAjouter("Une de vos commande est suspendue!!!", "danger");
+        }
+        
+     });
+
+     
+    }
+    
+  }
+
+
+
 
 clickBars(){
 	$('#bars-open').css('display', 'none');

@@ -1,0 +1,123 @@
+
+
+
+<div id="container-p">
+    <div id="nav-p">
+        <nav>
+            <ul>
+                <li><a href="profile/ajouter-produit">Ajouter Produit</a></li>
+                <li><a href="profile/list-produit">Mes Produits</a></li>
+                <li><a href="profile">Mon Profile</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="form-part-p">
+
+
+
+        
+
+
+
+
+        
+
+<div class="display-elements">
+    <div id="ajout-text">
+        <h2 *ngIf="commandes.length !== 0" style="color: #0f6674; margin-bottom: 20px; text-align: center; text-decoration: underline;">Liste des commandes</h2>
+        <h2 *ngIf="commandes.length === 0" style="color: #0f6674; margin-bottom: 20px; text-align: center;">Auncune commande enrégistrée</h2>
+    </div>
+</div>
+
+
+
+<div class="contenir-personne"></div>
+<div class=" card ">
+   <!--  <input type="text" id="myInput" (onkeyup)="myFunction()" placeholder="Search for names.."> -->
+    <table id="dtBasicExample" class="table table-striped table-hover table-bordered table-sm" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th class="th-sm">Date</th>
+                <th class="th-sm">PTH</th>
+                <th class="th-sm">TVA</th>
+                <th class="th-sm">TTC</th>
+                <th class="th-sm">Produits</th>
+                <th class="th-sm">Etat</th>
+                <!-- <th class="th-sm">Action</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let commande of commandes" >
+                <th>{{commande.date | date}}</th>
+                <td>{{commande.pth}} CFA</td>
+                <td>{{commande.tva}} CFA</td>
+                <td>{{commande.get_prix_total_final_panier}} CFA</td>
+                <td>
+                    <select>
+                        <optgroup label="Liste des produits commandés">
+                            <option *ngFor="let pr of commande.produitAcommandes">
+                                {{pr.produit?.nom}}
+                                (<span *ngIf="pr.produit?.diminu_price">{{pr.produit?.diminu_price}}</span><span *ngIf="!pr.produit?.diminu_price">{{pr.produit?.prix}}</span> * {{pr.quantite}})
+                            </option>
+                        </optgroup>
+                    </select>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button [ngClass]="{
+                            'btn btn-danger dropdown-toggle': !commande.livraison?.estLivrer,
+                            'btn btn-success dropdown-toggle': commande.livraison?.estLivrer
+                            }"
+                            type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                          <span *ngIf="!commande.livraison?.estLivrer">Pas encore livrée</span>
+                          <span *ngIf="commande.livraison?.estLivrer">Est livrée</span>
+
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
+                          <a class="dropdown-item bg-danger"
+                            style="cursor: pointer; color: white;"
+                              >Pas encore livrée</a>
+                          <a class="dropdown-item bg-success"
+                            style="cursor: pointer; color: white;"
+                             >Est livrée</a>
+                        </div>
+                      </div>
+                    <br />
+                    <span>{{commande.livraison?.date | date}}</span>
+                </td>
+                <!-- <td><i-bs  name="trash-fill" class="text-danger margin-left" style="cursor: pointer;" width="1rem" height="1rem"></i-bs></td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+    
+    
+    
+
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

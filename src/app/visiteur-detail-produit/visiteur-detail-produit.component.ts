@@ -4,7 +4,9 @@ import { environment } from 'src/environments/environment';
 import { Categorie } from '../models/Categorie';
 import { Image } from '../models/Image';
 import { Produit } from '../models/Produit';
+import { ProduitImage } from '../models/ProduitImage';
 import { Text } from '../models/Text';
+import { CategoryService } from '../services/category/category.service';
 import { ImageService } from '../services/image/image.service';
 import { PanierService } from '../services/panier/panier.service';
 import { ProductService } from '../services/product/product.service';
@@ -17,6 +19,8 @@ import { ProductService } from '../services/product/product.service';
 export class VisiteurDetailProduitComponent implements OnInit {
   idProduit: number = 0;
   produits: Produit[] = [];
+  produitsListSearch: ProduitImage[] = [];
+
   produit: Produit = new Produit();
   images: Image[] = [];
   imageChoice: Image = new Image();
@@ -24,7 +28,7 @@ export class VisiteurDetailProduitComponent implements OnInit {
   categorie: Categorie = new Categorie();
 
   constructor(private panierService: PanierService,private produitService: ProductService, 
-    private route: ActivatedRoute, private imagesService: ImageService) { }
+    private route: ActivatedRoute, private imagesService: ImageService, private categorieService: CategoryService) { }
 
   ngOnInit(): void {
 
@@ -39,7 +43,22 @@ export class VisiteurDetailProduitComponent implements OnInit {
         this.imagesService.imagesOfProduit(Number(this.idProduit)).subscribe((res: Image[]) => {
           this.images = res;
           this.imageChoice = this.images[0] || new Image();
-        })
+        });
+
+        this.categorieService.searhProduitByCategory(this.categorie.nom).subscribe((pds: Produit[]) => {
+          this.produitsListSearch = pds;
+          for(let i = 0; i < this.produitsListSearch.length; i++){
+            if(this.produitsListSearch[i].quantite > 0 ){
+              this.imagesService.imageOfProduit(Number(this.produitsListSearch[i].id)).subscribe((res: Image) => {
+                this.produitsListSearch[i].image = res;
+                this.produitsListSearch[i].categorie = 	this.produitsListSearch[i].categories?.find((item, index) => index === 0) ||  new Categorie();
+                });
+            }
+
+          }
+        });
+
+
       }
     });
   }

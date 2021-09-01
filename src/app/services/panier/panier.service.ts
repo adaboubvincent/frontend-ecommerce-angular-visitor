@@ -75,6 +75,17 @@ emitGetPrixTotalPanier(){
 }
 
 
+getPrixTotalPanierId(id: number | undefined): Observable<any> {
+ 
+  return this.http.get<any>(this.url + "get-prix-total-panier-id/"+id+"/");
+}
+
+
+getProduitACommandeByPanier(id: number | undefined):  Observable<Array<ProduitACommander>>{
+  return this.http.get<Array<ProduitACommander>>(this.url + "get-produit-a-commande-by-panier/"+id+"/");
+}
+
+
 }
 
 

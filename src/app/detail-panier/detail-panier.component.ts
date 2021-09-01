@@ -16,6 +16,13 @@ import { Client } from '../models/Client';
 import { ClientService } from '../services/client/client.service';
 import { FournisseurUserService } from '../services/fournisseur_user/fournisseur-user.service';
 import { FournisseurUser } from '../models/FournisseurUser';
+import { FormBuilder, Validators } from '@angular/forms';
+import * as $ from 'jquery';
+
+interface MyObj {
+  tx_reference: Number;
+  status: Number;
+}
 
 @Component({
   selector: 'app-detail-panier',
@@ -41,9 +48,19 @@ export class DetailPanierComponent implements OnInit {
   infosPaiement?: InfosPaiement;
   client: Client | FournisseurUser = new Object();
   remplireInfos: boolean = false;
+  isPossibleToCommande = false;
+
+  isTrainingCommande = false;
+
+  formNumero = this.fb.group({
+    numero: ['', Validators.required]
+  });
+
+  role: string | null = (localStorage.getItem('role')) ? localStorage.getItem('role') : "Iconnue";
+
   constructor(private produitService: ProductService, private imagesService: ImageService, private panierService: PanierService,
-    private produitacommanderService: ProduitacommanderService, private paiementService: PaiementService,
-    private commanderService: CommanderService, private route: Router,
+    private produitacommanderService: ProduitacommanderService, private paiementService: PaiementService, 
+    private commanderService: CommanderService, private route: Router, private fb: FormBuilder,
     private clientService: ClientService, private fournisseurUserService: FournisseurUserService) { }
 
   ngOnInit(): void {
@@ -75,14 +92,23 @@ export class DetailPanierComponent implements OnInit {
 
     });
 
-    this.clientService.getClient().subscribe((res: Client) => {
+    if(this.role == "FOURNISSEUR"){
+      this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
       this.client = res;
     });
+    }else if(this.role == "CLIENT"){
+      this.clientService.getClient().subscribe((res: Client) => {
+        this.client = res;
+      });
+    }
+    
+    this.formNumero.get('numero')?.setValue((this.client.telephone) ? String(this.client.telephone) : "");
 
-    this.fournisseurUserService.getFournisseurUser().subscribe((res: FournisseurUser) => {
-      this.client = res;
-    });
+    if(String(this.client.telephone) != String(0) && this.client.adresse != ""){
+      this.isPossibleToCommande = true;
+    }
 
+    
   }
 
 
@@ -129,47 +155,196 @@ export class DetailPanierComponent implements OnInit {
     this.route.navigate(['#/produit/#/detail', id])
   }
 
+
+  getReseau(){
+    if(this.formNumero.get('numero')?.value.length == 8){
+      var existeFlooz = ["99", "98", "97", "96", "79","78", "77", "76"].findIndex((item) => {
+        return this.formNumero.get('numero')?.value.startsWith(item);
+      });
+      var existeTmoney = ["90", "91", "92", "93", "94","70", "71", "72", "73", "74"].findIndex((item) => {
+        return this.formNumero.get('numero')?.value.startsWith(item);
+      })
+      return existeFlooz !== -1
+            ? "FLOOZ"
+            : existeTmoney !== -1 ? "TMONEY" : "...";
+    }
+    return "..."
+    
+  }
   /* showCommandePage(){
     this.route.navigate(['#/commander'])
   } */
 
   showCommandePage(){
-    /*
-      """
-        Nom	                Description
-        tx_reference	    Identifiant Unique générée par PayGateGlobal pour la transaction
-        identifier	        Identifiant interne de la transaction de l’e-commerce. ex: Numero de commande Cet identifiant doit etre unique.
-        payment_reference	Code de référence de paiement généré par Flooz. Ce code peut être utilisé en cas de résolution de problèmes ou de plaintes.
-        amount	            Montant payé par le client
-        datetime	        Date and Heure de paiement
-        payment_method	    Méthode de paiement utilisée par le client. Valeurs possibles: FLOOZ, T-Money
-        phone_number	    Numéro de téléphone du client qui a effectué le paiement.
-        """
-
-        """
-        Les valeurs possible de la transaction sont:
-        0 : Transaction enregistrée avec succès
-        2 : Jeton d’authentification invalide
-        4 : Paramètres Invalides
-        6 : Doublons détectées. Une transaction avec le même identifiant existe déja.
-      """
-    */
+    
 
       if(String(this.client.telephone) != String(0) && this.client.adresse != ""){
         this.remplireInfos = false;
-        var d = new Date();
-        var date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
-        var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
-//prixTotalPanierFinal String(this.prixTotalPanierFinal)
-        this.infosPaiement = new InfosPaiement(String(this.client.telephone), "25", date+hours, "http://127.0.0.1:8882/commander-effectuee");
+        this.isTrainingCommande = true;
+        let d = new Date();
+        let date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+        let hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+        let date_hours = date + " " + hours;
 
-        window.location.href = "https://paygateglobal.com/v1/page?token="+"c038a374-b987-475a-abf9-5895f3a56b1b&amount="+this.infosPaiement?.montant+"&description="+this.infosPaiement?.description+"&identifier="+this.infosPaiement?.identifierCommande+"&url="+this.infosPaiement?.urlRedirectApresPaiement+"&phone="+this.infosPaiement?.phoneClient;
+        this.paiementService.paiement_reference(date_hours, "enregistrer").subscribe((res)=>{
+          //this.infosPaiement = new InfosPaiement(String(this.client.telephone), "25", date_hours, "http://127.0.0.1:8882/commander-effectuee");
+          
+          localStorage.setItem("identifier", date_hours);
+          //window.location.href = "https://paygateglobal.com/v1/page?token="+"c038a374-b987-475a-abf9-5895f3a56b1b&amount="+this.infosPaiement?.montant+"&description="+this.infosPaiement?.description+"&identifier="+this.infosPaiement?.identifierCommande+"&url="+this.infosPaiement?.urlRedirectApresPaiement+"&phone="+this.infosPaiement?.phoneClient;
+          /* this.paiementService.paiement_flooz_tmoney_post("25", "", date_hours, this.formNumero.get('numero')?.value, this.getReseau()).subscribe((res)=>{
+           
+            if(res?.status == 0){
+              this.commanderService.notificationAjouter("Veuillez valider votre transaction en cours!", "success");
+            }else{
+              this.commanderService.notificationAjouter("Un problème a été survenu. Veuillez réessayer", "warning");
+            }
+            this.isTrainingCommande =false;
 
+          },
+          (error)=>{
+            console.log(error);
+            this.commanderService.notificationAjouter("Un problème a été survenu. Veuillez réessayer", "warning");
+            this.isTrainingCommande =false;
+          }); */
+
+
+
+
+/* 
+          var url = "https://paygateglobal.com/api/v1/pay";
+
+var xhr = new XMLHttpRequest();
+xhr.open("POST", url); */
+
+/* xhr.setRequestHeader("Accept", "application/json");
+xhr.setRequestHeader("Content-Type", "application/json"); 
+'Accept': 'application/json',
+      'Content-Type': 'application/json'*/
+/* var data = `{
+  "auth_token": "c038a374-b987-475a-abf9-5895f3a56b1b",
+  "amount": "25",
+  "description": "description",
+  "identifier": "201002010020100",
+  "phone_number": "97838526",
+  "network": "FLOOZ"
+}`;
+
+xhr.send(data); */
+
+/* xhr.onreadystatechange = function () {
+   if (xhr.readyState === 4) {
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+   }}; */
+/*    const response = await fetch("https://paygateglobal.com/api/v1/pay", {
+    method: 'POST',
+    headers: {
+      
+    },
+    body: `{
+      "auth_token": "c038a374-b987-475a-abf9-5895f3a56b1b",
+      "amount": "25",
+      "description": "description",
+      "identifier": "201002010020100",
+      "phone_number": "97838526",
+      "network": "FLOOZ"
+    }`,
+    }); 
+    
+    response.json().then(data => {
+      console.log(data);
+    });  
+
+*/
+
+    /* $.ajax({
+      type: "POST",
+      url: "https://paygateglobal.com/api/v1/pay/?auth_token=c038a374-b987-475a-abf9-5895f3a56b1b&amount=25&identifier="+date_hours+"&phone_number="+this.formNumero.get('numero')?.value+"&network="+this.getReseau(),
+      data: JSON.stringify({
+        auth_token: "c038a374-b987-475a-abf9-5895f3a56b1b",
+        amount: "25",
+        description: "description",
+        identifier: "2010007",
+        phone_number: "97838526",
+        network: "FLOOZ"
+      }),
+      success: function (result) {
+        console.log(result);
+        this.isTrainingCommande =false;
+        if(result?.status == 0){
+          //this.commanderService.notificationAjouter("Veuillez valider votre transaction en cours!", "success");
+        }else{
+          //this.commanderService.notificationAjouter("Un problème a été survenu. Veuillez réessayer", "warning");
+        }
+        window.location.href = "http://127.0.0.1:8882/commander-effectuee";
+        
+      },
+      error: function (result, status) {
+        console.log(result);
+        this.isTrainingCommande =false;
+        //this.commanderService.notificationAjouter("Un problème a été survenu. Veuillez réessayer", "warning");
+      }
+      
+   }); */
+
+
+   var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://paygateglobal.com/api/v1/pay/?auth_token=c038a374-b987-475a-abf9-5895f3a56b1b&amount="+this.prixTotalPanierFinal+"&identifier="+date_hours+"&phone_number="+this.formNumero.get('numero')?.value+"&network="+this.getReseau());
+  /* xhr.setRequestHeader("Accept", "application/json");
+  xhr.setRequestHeader("Content-Type", "application/json"); */
+  var commanderService = this.commanderService;
+  var isTrainingCommande = true;
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if(xhr.status === 200){
+        let res: MyObj = JSON.parse(xhr.responseText);
+        if(res.status == 0){
+          commanderService.notificationAjouter("Veuillez valider votre transaction en cours!", "success");
+          window.location.href = "http://127.0.0.1:8882/commander-effectuee";
+        }else{
+          commanderService.notificationAjouter("Un problème a été survenu. Veuillez réessayer", "warning");
+        }
+        
+      }
+    }
+    isTrainingCommande =false;
+  };
+    
+  var data = `{
+          "auth_token": "c038a374-b987-475a-abf9-5895f3a56b1b",
+          "amount": "25",
+          "description": "description",
+          "identifier": ${date_hours},
+          "phone_number": ${this.formNumero.get('numero')?.value},
+          "network": ${this.getReseau()}
+        }`;
+
+  xhr.send(data);
+  this.isTrainingCommande = isTrainingCommande;
+
+
+
+    
+   //this.commanderService.notificationAjouter("Veuillez valider votre transaction en cours!", "success");
+
+
+
+        },
+        (error)=>{
+          console.log(error);
+          this.isTrainingCommande =false;
+        });
+
+        
       }else{
         this.remplireInfos = true;
         this.commanderService.notificationAjouter("Veuilez remplir vos informations nécessaire pour la livraison", "warning");
       }
+      
+    
+  }
 
+  paiement(){
 
   }
 

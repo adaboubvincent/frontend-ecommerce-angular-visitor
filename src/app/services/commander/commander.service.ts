@@ -22,7 +22,7 @@ export class CommanderService extends DaoService<Categorie>{
       }),
       body: token
     };
-    return this.http.post<Text>(this.url + "commander/", token, options);
+    return this.http.post<Text>(this.url + "commander/?identifier="+String(localStorage.getItem("identifier")), token, options);
   }
 
 }

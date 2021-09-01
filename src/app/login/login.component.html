@@ -72,7 +72,9 @@
                   <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Retourner</button>
                     <button (click)="submitEmail()" [disabled]="!formResetPassword.valid" 
-                    class="btn btn-primary bg-color-site text-white" type="submit">Envoyer</button>
+                    class="btn btn-primary bg-color-site text-white" *ngIf="!isSending" type="submit">Envoyer</button>
+                    <button [disabled]="true" 
+                    class="btn btn-primary bg-color-site text-white" *ngIf="isSending" type="submit">Envoyer en cours...</button>
                   </div>
                   </div>
                 </div>
