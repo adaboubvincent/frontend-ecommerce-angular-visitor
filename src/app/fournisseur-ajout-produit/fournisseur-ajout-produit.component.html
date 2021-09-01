@@ -14,7 +14,7 @@
     <div id="form-part-p">
 
 
-
+<div *ngIf="fournisseurUser.activer">
         
 <form enctype="multipart/form-data">
 
@@ -96,7 +96,11 @@
     
         <button [disabled]="!nom.valid || !prix.valid || !categories.valid || !caracteristique.valid" type="submit" class="btn class-bg bg-success text-white" (click)="editProduit(idProduit)" *ngIf="modeModify" >Modifier ce produit</button>
       </form>
-    
+    </div>
+
+    <div *ngIf="!fournisseurUser.activer">
+        <p style="color: red; font-weight: bold;">Votre compte Fournisseur n'est pas encore activer. Par conséquent, vous ne pouvez pas encore ajouter aucun produit (Ou probablement désactivé).</p>
+    </div>
     
     
 

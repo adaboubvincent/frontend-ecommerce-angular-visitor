@@ -245,8 +245,8 @@
                     <div class="line no-margin"></div><!-- /.line -->
                     <h4 *ngIf="role == 'FOURNISSEUR'">
                         <span>Status : 
-                          <i *ngIf="fournisseurUser.activer == true" class="fa fa-check" style="color: green;" aria-hidden="true"></i>
-                          <i *ngIf="fournisseurUser.activer == false" class="fa fa-times" style="color: red;" aria-hidden="true"></i>
+                          <i *ngIf="fournisseurUser.activer" class="fa fa-check" style="color: green;" aria-hidden="true">Activé</i>
+                          <i *ngIf="!fournisseurUser.activer" class="fa fa-times" style="color: red;" aria-hidden="true">Non Activé</i>
                         </span>
                       </h4>
                     <form *ngIf="role == 'CLIENT'" class="pt-3" [formGroup]="formClient">
