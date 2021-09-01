@@ -42,7 +42,7 @@ export class DetailPanierComponent implements OnInit {
   client: Client | FournisseurUser = new Object();
   remplireInfos: boolean = false;
   constructor(private produitService: ProductService, private imagesService: ImageService, private panierService: PanierService,
-    private produitacommanderService: ProduitacommanderService, private paiementService: PaiementService, 
+    private produitacommanderService: ProduitacommanderService, private paiementService: PaiementService,
     private commanderService: CommanderService, private route: Router,
     private clientService: ClientService, private fournisseurUserService: FournisseurUserService) { }
 
@@ -134,7 +134,7 @@ export class DetailPanierComponent implements OnInit {
   } */
 
   showCommandePage(){
-    /* 
+    /*
       """
         Nom	                Description
         tx_reference	    Identifiant Unique générée par PayGateGlobal pour la transaction
@@ -160,17 +160,17 @@ export class DetailPanierComponent implements OnInit {
         var d = new Date();
         var date = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
         var hours = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds()
-//prixTotalPanierFinal
-        this.infosPaiement = new InfosPaiement(String(this.client.telephone), String(this.prixTotalPanierFinal), date+hours, "http://127.0.0.1:8882/commander-effectuee");
-      
+//prixTotalPanierFinal String(this.prixTotalPanierFinal)
+        this.infosPaiement = new InfosPaiement(String(this.client.telephone), "25", date+hours, "http://127.0.0.1:8882/commander-effectuee");
+
         window.location.href = "https://paygateglobal.com/v1/page?token="+"c038a374-b987-475a-abf9-5895f3a56b1b&amount="+this.infosPaiement?.montant+"&description="+this.infosPaiement?.description+"&identifier="+this.infosPaiement?.identifierCommande+"&url="+this.infosPaiement?.urlRedirectApresPaiement+"&phone="+this.infosPaiement?.phoneClient;
 
       }else{
         this.remplireInfos = true;
         this.commanderService.notificationAjouter("Veuilez remplir vos informations nécessaire pour la livraison", "warning");
       }
-      
-    
+
+
   }
 
 
