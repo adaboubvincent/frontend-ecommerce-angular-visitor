@@ -63,7 +63,7 @@
                   <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true" >&times;</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <h4 class="modal-title">Mot de passse oublie ?</h4>
+                    <h4 class="modal-title">Mot de passse oublié ?</h4>
                   </div>
                   <div class="modal-body">
                     <p>Entrez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.</p>
@@ -71,16 +71,16 @@
                   </div>
                   <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-danger" type="button">Retourner</button>
-                    <button (click)="submitEmail()" [disabled]="!formResetPassword.valid" 
+                    <button (click)="submitEmail()" [disabled]="!formResetPassword.valid"
                     class="btn btn-primary bg-color-site text-white" *ngIf="!isSending" type="submit">Envoyer</button>
-                    <button [disabled]="true" 
-                    class="btn btn-primary bg-color-site text-white" *ngIf="isSending" type="submit">Envoyer en cours...</button>
+                    <button [disabled]="true"
+                    class="btn btn-primary bg-color-site text-white" *ngIf="isSending" type="submit">Envoi en cours...</button>
                   </div>
                   </div>
                 </div>
                 </div>
               </form>
-                
+
 
 
             </div>

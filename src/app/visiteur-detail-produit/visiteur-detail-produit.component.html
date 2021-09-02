@@ -109,7 +109,7 @@
                 <div class="col-lg-6 pb-2">
                 </div>
                 <div class="col-lg-6">
-                  <a href="#" (click)="addProductToCart(produit.id)" class="btn btn-success w-100">ajouter au panier</a>
+                  <a  (click)="addProductToCart(produit.id)" class="btn btn-success w-100">ajouter au panier</a>
                 </div>
               </div>
             </div>
@@ -118,4 +118,42 @@
       </div>
     </div>
   </div>
+</div>
+
+<div>
+  <h2 style="text-align: center"></h2>
+  <div class="container" *ngIf="produitsListSearch.length !== 0">
+    <h3 class="h3">Voir des Articles Similaires</h3>
+    <div class="row" >
+      <div class="col-md-3 col-sm-6"*ngFor="let pr of produitsListSearch" style="margin-bottom: 7px;">
+        <div class="product-grid">
+          <div class="product-image">
+            <a href="#">
+              <img class="pic-1" src="{{url}}{{pr.image?.image}}" (click)="showPageDetailProduit(pr?.id)" style="height: 150px; width: 180px;">
+              <img class="pic-2" src="{{url}}{{pr.image?.image}}" (click)="showPageDetailProduit(pr?.id)" style="height: 150px; width: 180px;margin-left:7%; ">
+            </a>
+            <ul class="social">
+              <li><a (click)="showPageDetailProduit(pr?.id)" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+              <li><a (click)="addProductToCart(pr.id)" data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+            </ul>
+          </div>
+          <ul class="rating">
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star"></li>
+            <li class="fa fa-star disable"></li>
+          </ul>
+          <div class="product-content">
+            <h3 class="title"><a href="#">{{pr.nom}}</a></h3>
+            <div class="price" *ngIf="pr.diminu_price"> {{pr.diminu_price}} CFA
+              <span> {{pr.prix}} CFA</span>
+            </div>
+            <a class="add-to-cart" (click)="addProductToCart(pr.id)">+ ajouter au panier <i class="fa fa-shopping-cart"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
 </div>

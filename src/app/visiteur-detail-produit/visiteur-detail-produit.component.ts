@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Categorie } from '../models/Categorie';
 import { Image } from '../models/Image';
@@ -27,8 +27,9 @@ export class VisiteurDetailProduitComponent implements OnInit {
   url: string = environment.APIEndpoint;
   categorie: Categorie = new Categorie();
 
-  constructor(private panierService: PanierService,private produitService: ProductService, 
-    private route: ActivatedRoute, private imagesService: ImageService, private categorieService: CategoryService) { }
+  constructor(private panierService: PanierService,private produitService: ProductService,
+    private route: ActivatedRoute, private imagesService: ImageService, private categorieService: CategoryService,
+              private router : Router) { }
 
   ngOnInit(): void {
 
@@ -39,7 +40,7 @@ export class VisiteurDetailProduitComponent implements OnInit {
         this.produit = this.findObject();
 
         this.categorie = this.produit.categories?.find((item, index) => index === 0) || new Categorie();
-        
+
         this.imagesService.imagesOfProduit(Number(this.idProduit)).subscribe((res: Image[]) => {
           this.images = res;
           this.imageChoice = this.images[0] || new Image();
@@ -72,12 +73,12 @@ export class VisiteurDetailProduitComponent implements OnInit {
     img.image = "/media/default.jpg";
 
     this.imageChoice = this.images.find((item) => item.id === Number(id)) || img;
- 
-    
+
+
   }
 
 
-  
+
   addProductToCart(id: number | undefined){
     this.panierService.ajouterAuPanier(localStorage.getItem('token'), id, 1).subscribe((res: Text) => {
       if(res.text === "produit ajoute avec succes!"){
@@ -85,11 +86,17 @@ export class VisiteurDetailProduitComponent implements OnInit {
       }else{
         this.produitService.notificationAjouter(res.text || "", "warning");
       }
-      
+
       this.panierService.emitPanierProduitACommander();
-      
+
     },
     (error) => this.produitService.notificationAjouter("Veuillez vous connecter!" || "", "warning"));
+  }
+
+  showPageDetailProduit(id: number | undefined = 0){
+    // this.router.navigate(['#/produit/#/detail', id]);
+    const url = '/%23/produit/%23/detail/' + id;
+    window.location.replace(url);
   }
 
 }

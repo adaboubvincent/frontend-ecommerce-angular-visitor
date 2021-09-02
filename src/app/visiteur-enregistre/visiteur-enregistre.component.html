@@ -62,12 +62,13 @@
                   </div>
                   <label>choisissez le type de compte </label>
                   <select formControlName="role" class="form-select" aria-label="Type de compte">
-                    <option value="FOURNISSEUR">fournisseur</option>
-                    <option value="CLIENT" >client</option>
+                    <option value="FOURNISSEUR">Vendeur</option>
+                    <option value="CLIENT" >Acheteur</option>
                   </select>
 
                   <div class="mt-3">
-                    <button  (click)="submit()" [disabled]="!formRegister.valid" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn bg-color-site text-white" >Créer Compte</button>
+                    <button *ngIf="!isloading" (click)="submit()" [disabled]="!formRegister.valid" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn bg-color-site text-white" >Créer Compte</button>
+                    <button *ngIf="isloading"  [disabled]="true" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn bg-color-site text-white" >création du compte en cours...</button>
                   </div>
                   <!-- <div class="text-center mt-4 font-weight-light"> Already have an account? <a routerLink="login" class="text-primary">Login</a>
                   </div>-->

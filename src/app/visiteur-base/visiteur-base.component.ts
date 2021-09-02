@@ -219,7 +219,7 @@ searchByCategory(categorie: string | undefined){
 
 
 commander(){
-    if(localStorage.getItem("identifier") != ""){
+    if(localStorage.getItem("identifier") != "" && localStorage.getItem("token") != "" && localStorage.getItem("identifier") != undefined){
       console.log(localStorage.getItem("identifier"));
 
       var commanderService = this.commanderService;
@@ -257,17 +257,17 @@ commander(){
             commanderService.notificationAjouter("Une de vos transactions est suspendue", "warning");
             //route.navigateByUrl('');
           }
-          
+
         },
         error: function (result, status) {
           commanderService.notificationAjouter("Une de vos commande est suspendue!!!", "danger");
         }
-        
+
      });
 
-     
+
     }
-    
+
   }
 
 

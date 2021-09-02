@@ -44,11 +44,11 @@
               <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
                 <span class="user-menu d-block d-lg-none user-show-ul" (click)="userShowUl()" ><i class="fa fa-user" aria-hidden="true"></i></span>
                   <ul class="customer-links list-inline">
-                      <li *ngIf="username == ''"><a routerLink="login">S'authentifier</a></li>
-                      <li *ngIf="username == ''"><a routerLink="register">Creer un compte</a></li>
+                      <li *ngIf="username == '' || username == null"><a routerLink="login">S'authentifier</a></li>
+                      <li *ngIf="username == '' || username == null"><a routerLink="register">Creer un compte</a></li>
 
-                      <li *ngIf="username != ''"><a style="cursor: pointer;" routerLink="profile" >Profile</a></li>
-                      <li *ngIf="username != ''"><a style="cursor: pointer;" (click)="logout()" id="logout" >Se déconnecter</a></li>
+                      <li *ngIf="username != '' && username != null"><a style="cursor: pointer;" routerLink="profile" >Profile</a></li>
+                      <li *ngIf="username != '' && username != null"><a style="cursor: pointer;" (click)="logout()" id="logout" >Se déconnecter</a></li>
                     <li *ngIf="role === 'ADMIN'">
                         <a href="http://localhost:8881/" target="_blank" >Interface Admin</a>
                       </li>
@@ -431,7 +431,7 @@
                           style="background-color: #7c4dff; width: 60px; height: 2px;" />
                           <p>
                               Vous êtes à la recherche d'un article ? ou voulez-vous mettre vos articles sur un site que vous n'arrivez pas à trouver ? <br/>
-                              Ah! non n'allez plus loin, sur Mayaki, vous pouvez trouver et mettre vos articles en ligne ; et nous nous chargerons à vous remettre votre argent après la vente.
+                              Ah! non n'allez plus loin, sur Mayaki, vous pouvez trouver et mettre vos articles en ligne ; et nous nous chargerons de vous remettre votre argent après la vente.
                           </p>
                       </div>
 

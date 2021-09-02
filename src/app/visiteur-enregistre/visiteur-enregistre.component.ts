@@ -12,6 +12,7 @@ import { SecurityService } from '../services/user/security.service';
   styleUrls: ['./visiteur-enregistre.component.css']
 })
 export class VisiteurEnregistreComponent implements OnInit {
+  isloading = false;
 
   formRegister = this.fb.group({
     username: ['', Validators.required],
@@ -29,6 +30,7 @@ export class VisiteurEnregistreComponent implements OnInit {
 
   submit(){
     if(this.formRegister.get('password1')?.value === this.formRegister.get('password2')?.value){
+      this.isloading = true;
       this.passwordNotMatch = false;
       let user = new User();
       user.username = this.formRegister.get('username')?.value;
@@ -39,6 +41,7 @@ export class VisiteurEnregistreComponent implements OnInit {
       this.securityService.register(user).subscribe((res) => {
         let dict = res;
         if(res.user?.is_active == true){
+          this.isloading = false;
           localStorage.setItem('id', ""+res.user?.id || "0");
           localStorage.setItem('token', res.token || "");
           localStorage.setItem('username', res.user?.username || "");
@@ -49,12 +52,12 @@ export class VisiteurEnregistreComponent implements OnInit {
           localStorage.setItem('is_superuser', ""+res.user?.is_superuser || "");
           localStorage.setItem('role', ""+res.user?.role || "");
           localStorage.setItem('pageReload', 'true');
-  
+
           this.securityService.notificationAjouter("Vous avez un compte maintenant!", "success");
         }else{
           this.securityService.notificationAjouter(res?.test || "", "warning");
         }
-        
+
         this.route.navigateByUrl('');
 
         /* let panier = new Panier();
@@ -63,7 +66,10 @@ export class VisiteurEnregistreComponent implements OnInit {
         this.panierService.addT("ajout-panier/", panier).subscribe((res : Panier) => {
           localStorage.setItem('idPanier', ""+res.id || "");
         }); */
-      });
+      },
+        (error) => {
+          this.securityService.notificationAjouter(error?.test || "", "warning");
+        });
     }else{
       this.passwordNotMatch = true;
       this.securityService.notificationAjouter("Les mots de passe doivent être les mêmes!", "warning");
