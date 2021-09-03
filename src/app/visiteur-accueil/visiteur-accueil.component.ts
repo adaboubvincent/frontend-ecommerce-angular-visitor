@@ -21,6 +21,7 @@ import { VisiteurBaseComponent } from '../visiteur-base/visiteur-base.component'
 })
 export class VisiteurAccueilComponent implements OnInit {
 	url: string = environment.APIEndpoint;
+	lastToFirst : any[]=[];
 	produits: ProduitImage[] = [];
 	image: Image = new Image();
 
@@ -40,7 +41,7 @@ export class VisiteurAccueilComponent implements OnInit {
       localStorage.setItem('pageReload', 'false');
       window.location.reload();
     }
-    /* 
+    /*
     this.routerActive.queryParams
       .subscribe(params => {
         if(params.estCommande === "true") {
@@ -49,7 +50,9 @@ export class VisiteurAccueilComponent implements OnInit {
         }
       }
     ); */
-	this.produitService.getAll("produits/").subscribe((pds: Produit[]) => {
+
+
+  this.produitService.getAll("produits/").subscribe((pds: Produit[]) => {
 		this.produits = pds;
 		for(let i = 0; i < this.produits.length; i++){
       if(this.produits[i].quantite > 0 ){
@@ -60,17 +63,18 @@ export class VisiteurAccueilComponent implements OnInit {
       }
 		}
 
+
     //produis 1
     if(this.produits.length > 0){
       for(let i = 0; i < 3; i++){
         if(this.produits.find((item, index) => index === i)){
           this.produits1.push(this.produits[i])
         }
-        
+
       }
-      
+
     }
-	  
+
 
     //produis 2
     if(this.produits.length > 3){
@@ -116,16 +120,10 @@ export class VisiteurAccueilComponent implements OnInit {
         }
       }
     }
-
-
-
-    
-	  });
-
-    
-
-
+  });
+    this.detach();
   }
+
 
   showPageDetailProduit(id: number | undefined = 0){
     this.route.navigate(['#/produit/#/detail', id])
@@ -139,11 +137,25 @@ export class VisiteurAccueilComponent implements OnInit {
       }else{
         this.produitService.notificationAjouter(res.text || "", "warning");
       }
-      
+
       this.panierService.emitPanierProduitACommander();
       /* let visit: VisiteurBaseComponent = new VisiteurBaseComponent(this.produitService, this.route, this.imagesService, this.securityService, this.panierService);
       visit.ngOnInit(); */
     },
     (error) => this.produitService.notificationAjouter("Veuillez vous connecter!" || "", "warning"));
+  }
+  detach(){
+    this.produitService.getAll('produits/').subscribe((prod: Produit[]) => {
+      this.lastToFirst = prod;
+      this.lastToFirst = this.lastToFirst.reverse();
+      for(let i = 0; i < this.lastToFirst.length; i++){
+        if(this.lastToFirst[i].quantite > 0 ){
+          this.imagesService.imageOfProduit(Number(this.lastToFirst[i].id)).subscribe((res: Image) => {
+            this.lastToFirst[i].image = res;
+            this.lastToFirst[i].categorie = this.lastToFirst[i].categories?.find((item : Categorie, index : number) => index === 0) ||  new Categorie();
+          });
+        }
+      }
+    });
   }
 }

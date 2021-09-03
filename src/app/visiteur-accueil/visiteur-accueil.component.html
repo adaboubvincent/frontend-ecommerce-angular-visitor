@@ -189,7 +189,7 @@
                                 <h1 *ngIf="estCommande">Votre commande a été éffectuée avec succès.\nVous serez livrés dans 5 jours.</h1>
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h2>Les derniers <b style="color: #0f6674">Articles</b></h2>
+                                        <h2>Les <b style="color: #0f6674">Articles</b> a l'Affiche</h2>
                                         <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
@@ -405,10 +405,10 @@
 </div>
 
 
-<div class="container" *ngIf="produits.length !== 0">
+<div class="container" *ngIf="lastToFirst.length !== 0">
   <h3 class="h3"> Dans notre boutique </h3>
   <div class="row" >
-    <div class="col-md-3 col-sm-6"*ngFor="let pr of produits" style="margin-bottom: 7px;">
+    <div class="col-md-3 col-sm-6"*ngFor="let pr of lastToFirst" style="margin-bottom: 7px;">
       <div class="product-grid">
         <div class="product-image">
           <a href="#">
@@ -430,7 +430,10 @@
         <div class="product-content">
           <h3 class="title"><a href="#">{{pr.nom}}</a></h3>
           <div class="price" *ngIf="pr.diminu_price"> {{pr.diminu_price}} CFA
-            <span> {{pr.prix}} CFA</span>
+            <span style="color: #ff0000"> {{pr.prix}} CFA</span>
+          </div>
+          <div class="price" *ngIf="!pr.diminu_price" style="color :#000000"> {{pr.prix}} CFA
+            <span ></span>
           </div>
           <a class="add-to-cart" (click)="addProductToCart(pr.id)">+ ajouter au panier <i class="fa fa-shopping-cart"></i></a>
         </div>
